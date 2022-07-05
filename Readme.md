@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
-* Студент: [Андрей  Иванов](https://up.htmlacademy.ru/react/10/user/1992879).
-* Наставник: `Неизвестно`.
+* Студент: [Андрей  Иванов](https://htmlacademy.ru/profile/id1992879).
+* Наставник: [Артём Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
 
