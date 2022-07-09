@@ -14,8 +14,8 @@ function Card({className}: CardProps): JSX.Element {
         <span>Premium</span>
       </div>
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
-          <img className="place-card__image" src="img/room.jpg" width={cardPhotoWidth} height={cardPhotoHeight} alt="Place image" />
+        <a href="/">
+          <img className="place-card__image" src="img/room.jpg" width={cardPhotoWidth} height={cardPhotoHeight} alt="Place" />
         </a>
       </div>
       <div className={className === CardClassName.FAVORITES ? 'favorites__card-info place-card__info' : 'place-card__info'}>
@@ -38,7 +38,7 @@ function Card({className}: CardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Wood and stone place</a>
+          <a href="/">Wood and stone place</a>
         </h2>
         <p className="place-card__type">Private room</p>
       </div>
