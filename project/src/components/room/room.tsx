@@ -1,4 +1,4 @@
-import { CardClassName } from '../../constans';
+import { CardType } from '../../constans';
 import Card from '../card/card';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review-item/review-item';
@@ -139,9 +139,9 @@ function Room(): JSX.Element {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <Card className={CardClassName.NEAR_PLACES}/>
-            <Card className={CardClassName.NEAR_PLACES}/>
-            <Card className={CardClassName.NEAR_PLACES}/>
+            <Card type={CardType.NEAR_PLACES}/>
+            <Card type={CardType.NEAR_PLACES}/>
+            <Card type={CardType.NEAR_PLACES}/>
           </div>
         </section>
       </div>

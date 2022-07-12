@@ -2,7 +2,7 @@ import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
 import Footer from '../../components/footer/footer';
 import Card from '../../components/card/card';
-import { CardClassName } from '../../constans';
+import { CardType } from '../../constans';
 
 function FavoritesPage(): JSX.Element {
   return (
@@ -17,15 +17,15 @@ function FavoritesPage(): JSX.Element {
               <li className="favorites__locations-items">
                 <LocationItem/>
                 <div className="favorites__places">
-                  <Card className={CardClassName.FAVORITES}/>
-                  <Card className={CardClassName.FAVORITES}/>
+                  <Card type={CardType.FAVORITES}/>
+                  <Card type={CardType.FAVORITES}/>
                 </div>
               </li>
 
               <li className="favorites__locations-items">
                 <LocationItem/>
                 <div className="favorites__places">
-                  <Card className={CardClassName.FAVORITES}/>
+                  <Card type={CardType.FAVORITES}/>
                 </div>
               </li>
             </ul>

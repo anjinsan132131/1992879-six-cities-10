@@ -1,24 +1,38 @@
-import { CardClassName } from '../../constans';
+import { CardType } from '../../constans';
+import classNames from 'classnames';
 
 type CardProps = {
-  className: string;
+  type: string;
 }
 
-function Card({className}: CardProps): JSX.Element {
-  const cardPhotoWidth = className === CardClassName.FAVORITES ? '150' : '260';
-  const cardPhotoHeight = className === CardClassName.FAVORITES ? '110' : '200';
-
+function Card({type}: CardProps): JSX.Element {
   return (
-    <article className={`${className}__card place-card`}>
+    <article className={classNames('place-card',
+      {
+        'favorites__card': type === CardType.FAVORITES,
+        'cities__card': type === CardType.CITIES,
+        'near-places__card': type === CardType.NEAR_PLACES,
+
+      })}
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
-      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
+      <div className={classNames('place-card__image-wrapper',
+        {
+          'favorites__image-wrapper': type === CardType.FAVORITES,
+          'cities__image-wrapper': type === CardType.CITIES,
+          'near-places__image-wrapper': type === CardType.NEAR_PLACES,
+
+        })}
+      >
         <a href="/">
-          <img className="place-card__image" src="img/room.jpg" width={cardPhotoWidth} height={cardPhotoHeight} alt="Place" />
+          <img className="place-card__image" src="img/room.jpg" width={type === CardType.FAVORITES ? '150' : '260'} height={type === CardType.FAVORITES ? '110' : '200'} alt="Place" />
         </a>
       </div>
-      <div className={className === CardClassName.FAVORITES ? 'favorites__card-info place-card__info' : 'place-card__info'}>
+      <div className={classNames('place-card__info',
+        {'favorites__card-info': type === CardType.FAVORITES})}
+      >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;80</b>

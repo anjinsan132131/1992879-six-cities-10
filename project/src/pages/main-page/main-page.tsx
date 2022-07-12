@@ -3,7 +3,7 @@ import Header from '../../components/header/header';
 import Locations from '../../components/locations/locations';
 import Sorting from '../../components/sorting/sorting';
 import Map from '../../components/map/map';
-import { CardClassName } from '../../constans';
+import { CardType } from '../../constans';
 
 type MainPageProps = {
   quantity: number;
@@ -26,11 +26,11 @@ function MainPage({quantity}: MainPageProps): JSX.Element {
               <b className="places__found">{quantity} places to stay in Amsterdam</b>
               <Sorting/>
               <div className="cities__places-list places__list tabs__content">
-                <Card className={CardClassName.CITIES}/>
-                <Card className={CardClassName.CITIES}/>
-                <Card className={CardClassName.CITIES}/>
-                <Card className={CardClassName.CITIES}/>
-                <Card className={CardClassName.CITIES}/>
+                <Card type={CardType.CITIES}/>
+                <Card type={CardType.CITIES}/>
+                <Card type={CardType.CITIES}/>
+                <Card type={CardType.CITIES}/>
+                <Card type={CardType.CITIES}/>
               </div>
             </section>
             <div className="cities__right-section">
