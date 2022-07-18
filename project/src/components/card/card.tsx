@@ -1,44 +1,60 @@
-import { CardType } from '../../constans';
+import { Link } from 'react-router-dom';
+import { CardType, AppRoute } from '../../constans';
 import classNames from 'classnames';
+import { HotelOffer } from '../../types/hotel-type';
 
 type CardProps = {
-  type: string;
+  cardType: string;
+  offer: HotelOffer;
+  onMouseOver?: (cardId: number) => void;
 }
 
-function Card({type}: CardProps): JSX.Element {
+function Card({cardType, offer, onMouseOver}: CardProps): JSX.Element {
+  const { id, rating, price, title, type, isPremium, previewImage, isFavorite } = offer;
+  const cardRating = rating * 100 / 5;
+
+  const articleClass = classNames('place-card',
+    {
+      'favorites__card': cardType === CardType.FAVORITES,
+      'cities__card': cardType === CardType.CITIES,
+      'near-places__card': cardType === CardType.NEAR_PLACES,
+    });
+
+  const imageClass = classNames('place-card__image-wrapper',
+    {
+      'favorites__image-wrapper': cardType === CardType.FAVORITES,
+      'cities__image-wrapper': cardType === CardType.CITIES,
+      'near-places__image-wrapper': cardType === CardType.NEAR_PLACES,
+    });
+
   return (
-    <article className={classNames('place-card',
-      {
-        'favorites__card': type === CardType.FAVORITES,
-        'cities__card': type === CardType.CITIES,
-        'near-places__card': type === CardType.NEAR_PLACES,
+    <article className={articleClass} onMouseOver={() => onMouseOver?.(id)}>
+      {isPremium ? (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      ) : ''}
 
-      })}
-    >
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
-      <div className={classNames('place-card__image-wrapper',
-        {
-          'favorites__image-wrapper': type === CardType.FAVORITES,
-          'cities__image-wrapper': type === CardType.CITIES,
-          'near-places__image-wrapper': type === CardType.NEAR_PLACES,
-
-        })}
-      >
+      <div className={imageClass}>
         <a href="/">
-          <img className="place-card__image" src="img/room.jpg" width={type === CardType.FAVORITES ? '150' : '260'} height={type === CardType.FAVORITES ? '110' : '200'} alt="Place" />
+          <img className="place-card__image" src={previewImage} width={cardType === CardType.FAVORITES ? '150' : '260'} height={cardType === CardType.FAVORITES ? '110' : '200'} alt="Place" />
         </a>
       </div>
       <div className={classNames('place-card__info',
-        {'favorites__card-info': type === CardType.FAVORITES})}
+        {'favorites__card-info': cardType === CardType.FAVORITES})}
       >
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;80</b>
+            <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button
+            className={classNames('button place-card__bookmark-button',
+              {
+                'place-card__bookmark-button--active': isFavorite
+              })}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -47,14 +63,14 @@ function Card({type}: CardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${cardRating}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">Wood and stone place</a>
+          <Link to={AppRoute.Room}>{title}</Link>
         </h2>
-        <p className="place-card__type">Private room</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

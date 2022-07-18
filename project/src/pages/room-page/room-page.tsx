@@ -1,11 +1,16 @@
 import Header from '../../components/header/header';
 import Room from '../../components/room/room';
+import { HotelOffer } from '../../types/hotel-type';
 
-function RoomPage(): JSX.Element {
+type RoomPageProps = {
+  offers: HotelOffer[];
+}
+
+function RoomPage({offers}: RoomPageProps): JSX.Element {
   return (
     <div className="page">
       <Header isNavVisible/>
-      <Room/>
+      <Room offers={offers}/>
     </div>
   );
 }
