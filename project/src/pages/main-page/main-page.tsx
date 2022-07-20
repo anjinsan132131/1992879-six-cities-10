@@ -3,12 +3,12 @@ import Locations from '../../components/locations/locations';
 import Sorting from '../../components/sorting/sorting';
 import Map from '../../components/map/map';
 import { CardType } from '../../constans';
-import { HotelOffer } from '../../types/hotel-type';
+import { Offer } from '../../types/offer-type';
 import CardList from '../../components/card-list/card-list';
 
 type MainPageProps = {
   quantity: number;
-  offers: HotelOffer[];
+  offers: Offer[];
 };
 
 function MainPage({quantity, offers}: MainPageProps): JSX.Element {

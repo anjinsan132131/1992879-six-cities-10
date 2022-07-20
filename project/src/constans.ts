@@ -16,3 +16,27 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN'
 }
+
+export const RATING_DATA = [
+  {
+    rating: '5',
+    value: 'perfect'
+  },
+  {
+    rating: '4',
+    value: 'good'
+  },
+  {
+    rating: '3',
+    value: 'not bad'
+  },
+  {
+    rating: '2',
+    value: 'badly'
+  },
+  {
+    rating: '1',
+    value: 'terribly'
+  }
+];
+

@@ -1,9 +1,9 @@
 import Header from '../../components/header/header';
 import Room from '../../components/room/room';
-import { HotelOffer } from '../../types/hotel-type';
+import { Offer } from '../../types/offer-type';
 
 type RoomPageProps = {
-  offers: HotelOffer[];
+  offers: Offer[];
 }
 
 function RoomPage({offers}: RoomPageProps): JSX.Element {

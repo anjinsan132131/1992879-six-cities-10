@@ -1,6 +1,6 @@
-import { HotelOffer } from '../types/hotel-type';
+import { Offer } from '../types/offer-type';
 
-export const HotelOffersMock: HotelOffer[] = [
+export const OffersMock: Offer[] = [
   {
     bedrooms: 3,
     city: {

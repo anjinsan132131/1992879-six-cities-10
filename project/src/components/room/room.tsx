@@ -1,11 +1,11 @@
 import { CardType } from '../../constans';
-import { HotelOffer } from '../../types/hotel-type';
+import { Offer } from '../../types/offer-type';
 import CardList from '../card-list/card-list';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review-item/review-item';
 
 type RoomProps = {
-  offers: HotelOffer[];
+  offers: Offer[];
 }
 
 function Room({offers}: RoomProps): JSX.Element {

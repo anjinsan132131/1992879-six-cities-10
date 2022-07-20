@@ -16,7 +16,7 @@ interface City {
   name: string;
 }
 
-export interface HotelOffer {
+export interface Offer {
   bedrooms: number;
   city: City;
   description: string;

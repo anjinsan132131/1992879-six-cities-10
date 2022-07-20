@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { HotelOffersMock } from './mocks/offers';
+import { OffersMock } from './mocks/offers';
 
 const Settings = {
   QUANTITY: 5
@@ -15,7 +15,7 @@ root.render(
   <React.StrictMode>
     <App
       quantity = {Settings.QUANTITY}
-      offers = {HotelOffersMock}
+      offers = {OffersMock}
     />
   </React.StrictMode>,
 );

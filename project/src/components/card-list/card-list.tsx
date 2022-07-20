@@ -1,4 +1,4 @@
-import { HotelOffer } from '../../types/hotel-type';
+import { Offer } from '../../types/offer-type';
 import Card from '../card/card';
 import classNames from 'classnames';
 import { CardType } from '../../constans';
@@ -6,15 +6,13 @@ import {useState} from 'react';
 
 type CardListProps = {
   type: string;
-  offers: HotelOffer[];
+  offers: Offer[];
 }
 
 function CardList({type, offers}: CardListProps): JSX.Element {
-  const [cardId, setCardId] = useState<number>();
+  const [, setCardId] = useState<number>();
 
   const onMouseOver = (id: number) => setCardId(id);
-  // eslint-disable-next-line no-console
-  console.log('cardId', cardId);
 
   const cardListClass = classNames(
     {
@@ -25,7 +23,14 @@ function CardList({type, offers}: CardListProps): JSX.Element {
 
   return (
     <div className={cardListClass}>
-      {offers.map((offer) => (<Card key={offer.id} cardType={type} offer={offer} onMouseOver={onMouseOver}/>))}
+      {offers.map((offer) => (
+        <Card
+          key={offer.id}
+          cardType={type}
+          offer={offer}
+          onMouseOver={onMouseOver}
+        />
+      ))}
     </div>
   );
 }

@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
 import { CardType, AppRoute } from '../../constans';
 import classNames from 'classnames';
-import { HotelOffer } from '../../types/hotel-type';
+import { Offer } from '../../types/offer-type';
 
 type CardProps = {
   cardType: string;
-  offer: HotelOffer;
+  offer: Offer;
   onMouseOver?: (cardId: number) => void;
 }
 
 function Card({cardType, offer, onMouseOver}: CardProps): JSX.Element {
   const { id, rating, price, title, type, isPremium, previewImage, isFavorite } = offer;
-  const cardRating = rating * 100 / 5;
+  const cardRating = rating / 0.05;
 
   const articleClass = classNames('place-card',
     {

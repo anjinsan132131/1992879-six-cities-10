@@ -6,11 +6,11 @@ import LoginPage from '../../pages/login-page/login-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import RoomPage from '../../pages/room-page/room-page';
 import PrivateRoute from '../../components/private-route/private-route';
-import { HotelOffer } from '../../types/hotel-type';
+import { Offer } from '../../types/offer-type';
 
 type AppProps = {
   quantity: number;
-  offers: HotelOffer[];
+  offers: Offer[];
 };
 
 function App({quantity, offers}: AppProps): JSX.Element {
