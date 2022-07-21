@@ -30,10 +30,16 @@ function ReviewForm(): JSX.Element {
 
         { RATING_DATA.map(({rating, value}) => (
           <Fragment key={rating}>
-            <input className="form__rating-input visually-hidden" name="rating" value={rating} id={`${rating}-stars`} type="radio" onChange={onStarChange}/>
+            <input
+              className="form__rating-input visually-hidden"
+              name="rating" value={rating}
+              id={`${rating}-stars`}
+              type="radio"
+              onChange={onStarChange}
+            />
             <label htmlFor={`${rating}-stars`} className="reviews__rating-label form__rating-label" title={value}>
               <svg className="form__star-image" width="37" height="33">
-                <use xlinkHref="#icon-star"></use>
+                <use xlinkHref="#icon-star" />
               </svg>
             </label>
           </Fragment>

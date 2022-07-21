@@ -33,4 +33,6 @@ export interface Offer {
   rating: number;
   title: string;
   type: string;
-  }
+}
+
+export default City;
