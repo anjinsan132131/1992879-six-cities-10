@@ -1,9 +1,14 @@
 import { CardType } from '../../constans';
-import Card from '../card/card';
+import { Offer } from '../../types/offer-type';
+import CardList from '../card-list/card-list';
 import ReviewForm from '../review-form/review-form';
 import ReviewItem from '../review-item/review-item';
 
-function Room(): JSX.Element {
+type RoomProps = {
+  offers: Offer[];
+}
+
+function Room({offers}: RoomProps): JSX.Element {
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -138,11 +143,7 @@ function Room(): JSX.Element {
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-            <Card type={CardType.NEAR_PLACES}/>
-            <Card type={CardType.NEAR_PLACES}/>
-            <Card type={CardType.NEAR_PLACES}/>
-          </div>
+          <CardList offers={offers} type={CardType.NEAR_PLACES}/>
         </section>
       </div>
     </main>

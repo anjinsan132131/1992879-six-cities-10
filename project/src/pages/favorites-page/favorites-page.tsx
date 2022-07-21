@@ -1,10 +1,15 @@
 import Header from '../../components/header/header';
 import LocationItem from '../../components/location-item/location-item';
 import Footer from '../../components/footer/footer';
-import Card from '../../components/card/card';
 import { CardType } from '../../constans';
+import { Offer } from '../../types/offer-type';
+import CardList from '../../components/card-list/card-list';
 
-function FavoritesPage(): JSX.Element {
+type FavoritesPageProps = {
+  offers: Offer[];
+}
+
+function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
       <Header isNavVisible/>
@@ -16,17 +21,12 @@ function FavoritesPage(): JSX.Element {
             <ul className="favorites__list">
               <li className="favorites__locations-items">
                 <LocationItem/>
-                <div className="favorites__places">
-                  <Card type={CardType.FAVORITES}/>
-                  <Card type={CardType.FAVORITES}/>
-                </div>
+                <CardList offers={offers} type={CardType.FAVORITES}/>
               </li>
 
               <li className="favorites__locations-items">
                 <LocationItem/>
-                <div className="favorites__places">
-                  <Card type={CardType.FAVORITES}/>
-                </div>
+                <CardList offers={offers} type={CardType.FAVORITES}/>
               </li>
             </ul>
           </section>
