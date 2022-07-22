@@ -1,25 +1,38 @@
-function ReviewItem(): JSX.Element {
+import dayjs from 'dayjs';
+import { Review } from '../../types/review-type';
+
+type ReviewItemProps = {
+  review: Review;
+};
+
+function ReviewItem({review}: ReviewItemProps): JSX.Element {
+  const { comment, date, rating, user } = review;
+
+  const reviewRating = rating / 0.05;
+  const reviewDate = dayjs(date).format('MMM YYYY');
+  const dateTime = dayjs(date).format('YYYY-MM-D');
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          Max
+          {user.name}
         </span>
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: '80%'}}></span>
-            <span className="visually-hidden">Rating</span>
+            <span style={{width: `${reviewRating}%`}}></span>
+            <span className="visually-hidden">{rating}</span>
           </div>
         </div>
         <p className="reviews__text">
-          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+          {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={dateTime}>{reviewDate}</time>
       </div>
     </li>
   );

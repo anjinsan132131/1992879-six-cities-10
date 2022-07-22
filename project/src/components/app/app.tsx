@@ -7,13 +7,15 @@ import PageNotFound from '../../pages/page-not-found/page-not-found';
 import RoomPage from '../../pages/room-page/room-page';
 import PrivateRoute from '../../components/private-route/private-route';
 import { Offer } from '../../types/offer-type';
+import { Review } from '../../types/review-type';
 
 type AppProps = {
   quantity: number;
   offers: Offer[];
+  reviews: Review[];
 };
 
-function App({quantity, offers}: AppProps): JSX.Element {
+function App({quantity, offers, reviews }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
@@ -37,7 +39,7 @@ function App({quantity, offers}: AppProps): JSX.Element {
         />
         <Route
           path={AppRoute.Room}
-          element={<RoomPage offers={offers}/>}
+          element={<RoomPage offers={offers} reviews={reviews} />}
         />
         <Route
           path="*"

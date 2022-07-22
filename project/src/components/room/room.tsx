@@ -2,13 +2,17 @@ import { CardType } from '../../constans';
 import { Offer } from '../../types/offer-type';
 import CardList from '../card-list/card-list';
 import ReviewForm from '../review-form/review-form';
-import ReviewItem from '../review-item/review-item';
+import { Review } from '../../types/review-type';
+import ReviewList from '../review-list/review-list';
+import Map from '../../components/map/map';
 
 type RoomProps = {
   offers: Offer[];
+  reviews: Review[];
 }
 
-function Room({offers}: RoomProps): JSX.Element {
+function Room({offers, reviews }: RoomProps): JSX.Element {
+  const nearOffers = offers.slice(1);
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -130,20 +134,20 @@ function Room({offers}: RoomProps): JSX.Element {
               </div>
             </div>
             <section className="property__reviews reviews">
-              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-              <ul className="reviews__list">
-                <ReviewItem/>
-              </ul>
-              <ReviewForm/>
+              <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+              <ReviewList reviews={reviews}/>
+              <ReviewForm />
             </section>
           </div>
         </div>
-        <section className="property__map map"></section>
+        <section className="property__map map">
+          <Map offers = {nearOffers} />
+        </section>
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <CardList offers={offers} type={CardType.NEAR_PLACES}/>
+          <CardList offers={nearOffers} type={CardType.NEAR_PLACES}/>
         </section>
       </div>
     </main>
