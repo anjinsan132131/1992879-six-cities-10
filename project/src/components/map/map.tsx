@@ -10,14 +10,8 @@ type MapProps = {
   offers: Offer[];
 };
 
-const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
-
-const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
+const customIcon = (iconName: string) => new Icon({
+  iconUrl: iconName,
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
@@ -38,12 +32,13 @@ function Map(props: MapProps): JSX.Element {
 
         marker
           .setIcon(selectedOffer !== undefined && offer.id === selectedOffer.id
-            ? currentCustomIcon
-            : defaultCustomIcon)
+            ? customIcon(URL_MARKER_CURRENT)
+            : customIcon(URL_MARKER_DEFAULT))
           .addTo(map);
       });
     }
   }, [map, offers, selectedOffer]);
+
   return (
     <section
       className="cities__map map"

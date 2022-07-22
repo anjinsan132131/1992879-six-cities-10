@@ -40,8 +40,17 @@ export const RATING_DATA = [
   }
 ];
 
+export const URL_MAP_LAYER =
+  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+
+export const MAP_LAYER_LINK =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+const URL_MARKER =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map';
+
 export const URL_MARKER_DEFAULT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+  `${URL_MARKER}/pin.svg`;
 
 export const URL_MARKER_CURRENT =
-  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+  `${URL_MARKER}/main-pin.svg`;
