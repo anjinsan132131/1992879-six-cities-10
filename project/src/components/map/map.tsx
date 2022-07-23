@@ -6,7 +6,7 @@ import { Offer } from '../../types/offer-type';
 import { URL_MARKER_DEFAULT, URL_MARKER_CURRENT } from '../../constans';
 
 type MapProps = {
-  selectedOffer: Offer;
+  selectedOffer?: Offer;
   offers: Offer[];
 };
 
@@ -16,8 +16,7 @@ const customIcon = (iconName: string) => new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map(props: MapProps): JSX.Element {
-  const {selectedOffer, offers} = props;
+function Map({selectedOffer, offers}: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, offers[0].city);
