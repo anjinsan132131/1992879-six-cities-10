@@ -9,7 +9,7 @@ type RoomPageProps = {
   reviews: Review[];
 }
 
-function RoomPage({offers, reviews, }: RoomPageProps): JSX.Element {
+function RoomPage({offers, reviews}: RoomPageProps): JSX.Element {
   return (
     <div className="page">
       <Header isNavVisible/>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CardType, AppRoute } from '../../constans';
+import { CardType, AppRoute, COEFFICIENT_REVIEW_RATING } from '../../constans';
 import classNames from 'classnames';
 import { Offer } from '../../types/offer-type';
 
@@ -11,7 +11,7 @@ type CardProps = {
 
 function Card({cardType, offer, onMouseOver}: CardProps): JSX.Element {
   const { id, rating, price, title, type, isPremium, previewImage, isFavorite } = offer;
-  const cardRating = rating / 0.05;
+  const cardRating = rating / COEFFICIENT_REVIEW_RATING;
 
   const articleClass = classNames('place-card',
     {

@@ -13,6 +13,7 @@ type RoomProps = {
 
 function Room({offers, reviews }: RoomProps): JSX.Element {
   const nearOffers = offers.slice(1);
+
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -141,7 +142,7 @@ function Room({offers, reviews }: RoomProps): JSX.Element {
           </div>
         </div>
         <section className="property__map map">
-          <Map offers = {nearOffers} />
+          <Map offers={nearOffers} />
         </section>
       </section>
       <div className="container">
