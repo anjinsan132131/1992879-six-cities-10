@@ -18,7 +18,7 @@ function CityList({cityList, currentCity}: CityListProps): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
-        { Object.values(cityList).map((city) => (
+        {Object.values(cityList).map((city) => (
           <CityItem key={city} city={city} onClick={onCityClick} currentCity={currentCity}/>
         ))}
       </ul>

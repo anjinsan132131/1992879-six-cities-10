@@ -38,9 +38,7 @@ function Map({selectedOffer, offers}: MapProps): JSX.Element {
       });
       map.addLayer(layerGroup);
     }
-    return () => {
-      layerGroup.clearLayers();
-    };
+    return layerGroup.clearLayers;
   }, [map, offers, selectedOffer]);
 
   return (

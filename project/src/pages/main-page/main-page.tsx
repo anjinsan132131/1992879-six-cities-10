@@ -33,7 +33,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
           <CityList cityList={Cities} currentCity={currentCity}/>
         </div>
         <div className="cities">
-          {offersByCity.length ? (
+          {offersByCity.length > 0 ? (
             <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
@@ -42,8 +42,8 @@ function MainPage({offers}: MainPageProps): JSX.Element {
                 <CardList offers={offersByCity} type={CardType.CITIES}/>
               </section>
               <div className="cities__right-section">
-                <Map selectedOffer = {offersByCity[0]}
-                  offers = {offersByCity}
+                <Map selectedOffer={offersByCity[0]}
+                  offers={offersByCity}
                 />
               </div>
             </div>
