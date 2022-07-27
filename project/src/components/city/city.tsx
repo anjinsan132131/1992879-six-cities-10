@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-type CityItemProps = {
+type CityProps = {
   city: string;
   currentCity: string;
   onClick: (city: string) => void;
 }
 
-function CityItem({city, currentCity, onClick}: CityItemProps): JSX.Element {
+function City({city, currentCity, onClick}: CityProps): JSX.Element {
   const cityClass = classNames('locations__item-link tabs__item',
     {
       'tabs__item--active': city === currentCity
@@ -20,7 +20,7 @@ function CityItem({city, currentCity, onClick}: CityItemProps): JSX.Element {
     >
       <Link
         className={cityClass}
-        to='#'
+        to={`?tab=${city}`}
       >
         <span>{city}</span>
       </Link>
@@ -28,5 +28,5 @@ function CityItem({city, currentCity, onClick}: CityItemProps): JSX.Element {
   );
 }
 
-export default CityItem;
+export default City;
 
