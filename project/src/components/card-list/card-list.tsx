@@ -2,7 +2,7 @@ import { Offer } from '../../types/offer-type';
 import Card from '../card/card';
 import classNames from 'classnames';
 import { CardType } from '../../constans';
-import {useState} from 'react';
+import { useState } from 'react';
 
 type CardListProps = {
   type: string;

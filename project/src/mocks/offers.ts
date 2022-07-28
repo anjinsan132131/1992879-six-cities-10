@@ -136,5 +136,71 @@ export const OffersMock: Offer[] = [
     rating: 5,
     title: 'Beautiful studio at great location',
     type: 'hotel'
-  }
+  },{
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 48.5112,
+        longitude: 2.2055,
+        zoom: 10
+      },
+      name: 'Paris',
+    },
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    goods: ['Heating'],
+    host: {
+      avatarUrl: 'img/avatar-angelina.jpg',
+      id: 3,
+      isPro: true,
+      name: 'Angelina'
+    },
+    id: 7,
+    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg'],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.51122233,
+      longitude: 2.20554432,
+      zoom: 8
+    },
+    maxAdults: 4,
+    previewImage: 'img/apartment-03.jpg',
+    price: 120,
+    rating: 4.8,
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment'
+  },{
+    bedrooms: 3,
+    city: {
+      location: {
+        latitude: 48.5112,
+        longitude: 2.2055,
+        zoom: 10
+      },
+      name: 'Paris',
+    },
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Paris.',
+    goods: ['Heating'],
+    host: {
+      avatarUrl: 'img/avatar-angelina.jpg',
+      id: 3,
+      isPro: true,
+      name: 'Angelina'
+    },
+    id: 8,
+    images: ['img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg'],
+    isFavorite: false,
+    isPremium: false,
+    location: {
+      latitude: 48.52122223,
+      longitude: 2.21554432,
+      zoom: 8
+    },
+    maxAdults: 4,
+    previewImage: 'img/apartment-03.jpg',
+    price: 120,
+    rating: 4.8,
+    title: 'Beautiful & luxurious studio at great location',
+    type: 'apartment'
+  },
 ];

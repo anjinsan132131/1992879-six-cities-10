@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import { COEFFICIENT_REVIEW_RATING, FORMAT_DATE_TIME, FORMAT_RREVIEW_DATE } from '../../constans';
 import { Review } from '../../types/review-type';
 
 type ReviewItemProps = {
@@ -8,9 +9,9 @@ type ReviewItemProps = {
 function ReviewItem({review}: ReviewItemProps): JSX.Element {
   const { comment, date, rating, user } = review;
 
-  const reviewRating = rating / 0.05;
-  const reviewDate = dayjs(date).format('MMM YYYY');
-  const dateTime = dayjs(date).format('YYYY-MM-D');
+  const reviewRating = rating / COEFFICIENT_REVIEW_RATING;
+  const reviewDate = dayjs(date).format(FORMAT_RREVIEW_DATE);
+  const dateTime = dayjs(date).format(FORMAT_DATE_TIME);
 
   return (
     <li className="reviews__item">

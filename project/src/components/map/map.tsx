@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { Icon, Marker } from 'leaflet';
+import { Icon, LayerGroup, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from './useMap';
 import { Offer } from '../../types/offer-type';
@@ -17,11 +17,12 @@ const customIcon = (iconName: string) => new Icon({
 });
 
 function Map({selectedOffer, offers}: MapProps): JSX.Element {
-
   const mapRef = useRef(null);
+  const layerGroupRef = useRef(new LayerGroup());
   const map = useMap(mapRef, offers[0].city);
 
   useEffect(() => {
+    const layerGroup = layerGroupRef.current;
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -35,7 +36,11 @@ function Map({selectedOffer, offers}: MapProps): JSX.Element {
             : customIcon(URL_MARKER_DEFAULT))
           .addTo(map);
       });
+      map.addLayer(layerGroup);
     }
+    return () => {
+      layerGroup.clearLayers();
+    };
   }, [map, offers, selectedOffer]);
 
   return (

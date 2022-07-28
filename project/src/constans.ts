@@ -54,3 +54,18 @@ export const URL_MARKER_DEFAULT =
 
 export const URL_MARKER_CURRENT =
   `${URL_MARKER}/main-pin.svg`;
+
+export const FORMAT_RREVIEW_DATE = 'MMM YYYY';
+
+export const FORMAT_DATE_TIME = 'YYYY-MM-D';
+
+export const COEFFICIENT_REVIEW_RATING = 0.05;
+
+export const Cities = {
+  Paris: 'Paris',
+  Cologne: 'Cologne',
+  Brussels: 'Brussels',
+  Amsterdam: 'Amsterdam',
+  Hamburg: 'Hamburg',
+  Dusseldorf: 'Dusseldorf'
+};
