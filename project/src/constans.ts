@@ -70,9 +70,9 @@ export const Cities = {
   Dusseldorf: 'Dusseldorf'
 };
 
-export const SORTING_OPTION = [
-  'Popular',
-  'Price: low to high',
-  'Price: high to low',
-  'Top rated first',
-];
+export const SORTING = {
+  POPULAR: 'Popular',
+  PRICE_LOW_TO_HIGH: 'Price: low to high',
+  PRICE_HIGH_TO_LOW: 'Price: high to low',
+  TOP_RATED_FIRST: 'Top rated first'
+};

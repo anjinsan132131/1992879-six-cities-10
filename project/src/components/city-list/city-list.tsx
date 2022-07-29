@@ -1,5 +1,6 @@
+import { SORTING } from '../../constans';
 import { useAppDispatch } from '../../hooks';
-import { selectCityAction, setOffersByCityAction } from '../../store/action';
+import { sortValueAction, selectCityAction, setOffersByCityAction } from '../../store/action';
 import CityItem from '../city-item/city-item';
 
 type CityListProps = {
@@ -13,6 +14,7 @@ function CityList({cityList, currentCity}: CityListProps): JSX.Element {
   const onCityClick = (city: string) => {
     dispatch(selectCityAction(city));
     dispatch(setOffersByCityAction());
+    dispatch(sortValueAction(SORTING.POPULAR));
   };
 
   return (

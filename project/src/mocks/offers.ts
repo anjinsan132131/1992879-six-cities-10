@@ -198,8 +198,8 @@ export const OffersMock: Offer[] = [
     },
     maxAdults: 4,
     previewImage: 'img/apartment-03.jpg',
-    price: 120,
-    rating: 4.8,
+    price: 150,
+    rating: 3.8,
     title: 'Beautiful & luxurious studio at great location',
     type: 'apartment'
   },

@@ -1,29 +1,37 @@
 import { useState } from 'react';
-import { SORTING_OPTION } from '../../constans';
-// import { Offer } from '../../types/offer-type';
+import { SORTING } from '../../constans';
 import SortingItem from '../sorting-item/sorting-item';
-
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { sortValueAction, sortingCityAction } from '../../store/action';
 
 function Sorting(): JSX.Element {
-  const [currentSort, setCurrentSort] = useState<string>(SORTING_OPTION[0]);
+  const [isFormOpened, setIsFormOpened] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const currentSort = useAppSelector((state) => state.sortValue);
+
+  const clickHandler = () => {
+    setIsFormOpened(!isFormOpened);
+  };
 
   const onSortingClick = (value: string) => {
-    setCurrentSort(value);
-    // eslint-disable-next-line no-console
-    console.log(value);
+    dispatch(sortValueAction(value));
+    dispatch(sortingCityAction());
+    setIsFormOpened(false);
   };
 
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
-      <span className="places__sorting-type" tabIndex={0}>
+      <span onClick={clickHandler} className="places__sorting-type" tabIndex={0}>
         {currentSort}
         <svg className="places__sorting-arrow" width="7" height="4">
-          <use xlinkHref="#icon-arrow-select"></use>
+          <use xlinkHref="#icon-arrow-select" />
         </svg>
       </span>
-      <ul className="places__options places__options--custom places__options--opened">
-        {SORTING_OPTION.map((value) => (
+      <ul className={`places__options places__options--custom ${isFormOpened && 'places__options--opened'}`}>
+        {Object.values(SORTING).map((value) => (
           <SortingItem key={value} onClick={onSortingClick} value={value} sortValue={''}/>
         ))}
       </ul>

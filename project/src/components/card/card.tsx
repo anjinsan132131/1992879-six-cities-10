@@ -7,9 +7,10 @@ type CardProps = {
   cardType: string;
   offer: Offer;
   onMouseOver?: (cardId: number) => void;
+  onMouseLeave?: () => void;
 }
 
-function Card({cardType, offer, onMouseOver}: CardProps): JSX.Element {
+function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Element {
   const { id, rating, price, title, type, isPremium, previewImage, isFavorite } = offer;
   const cardRating = rating / COEFFICIENT_REVIEW_RATING;
 
@@ -28,7 +29,7 @@ function Card({cardType, offer, onMouseOver}: CardProps): JSX.Element {
     });
 
   return (
-    <article className={articleClass} onMouseOver={() => onMouseOver?.(id)}>
+    <article className={articleClass} onMouseOver={() => onMouseOver?.(id)} onMouseLeave={() => onMouseLeave?.()}>
       {isPremium ? (
         <div className="place-card__mark">
           <span>Premium</span>
@@ -36,9 +37,9 @@ function Card({cardType, offer, onMouseOver}: CardProps): JSX.Element {
       ) : ''}
 
       <div className={imageClass}>
-        <a href="/">
+        <Link to={AppRoute.Room}>
           <img className="place-card__image" src={previewImage} width={cardType === CardType.FAVORITES ? '150' : '260'} height={cardType === CardType.FAVORITES ? '110' : '200'} alt="Place" />
-        </a>
+        </Link>
       </div>
       <div className={classNames('place-card__info',
         {'favorites__card-info': cardType === CardType.FAVORITES})}
