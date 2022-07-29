@@ -1,7 +1,7 @@
 import { SORTING } from '../../constans';
 import { useAppDispatch } from '../../hooks';
 import { sortValueAction, selectCityAction, setOffersByCityAction } from '../../store/action';
-import CityItem from '../city-item/city-item';
+import City from '../city/city';
 
 type CityListProps = {
   cityList: Record<string, string>;
@@ -21,7 +21,7 @@ function CityList({cityList, currentCity}: CityListProps): JSX.Element {
     <section className="locations container">
       <ul className="locations__list tabs__list">
         {Object.values(cityList).map((city) => (
-          <CityItem key={city} city={city} onClick={onCityClick} currentCity={currentCity}/>
+          <City key={city} city={city} onClick={onCityClick} currentCity={currentCity}/>
         ))}
       </ul>
     </section>
