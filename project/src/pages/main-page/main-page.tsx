@@ -3,20 +3,17 @@ import CityList from '../../components/city-list/city-list';
 import Sorting from '../../components/sorting/sorting';
 import Map from '../../components/map/map';
 import { CardType } from '../../constans';
-import { Offer } from '../../types/offer-type';
 import CardList from '../../components/card-list/card-list';
 import { Cities } from '../../constans';
 import { useAppSelector } from '../../hooks';
 import MainEmpty from '../../components/main-empty/main-empty';
 import classNames from 'classnames';
 
-type MainPageProps = {
-  offers: Offer[];
-};
-
-function MainPage({offers}: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
   const offersByCity = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);
+  const cityHover = useAppSelector((state) => state.hoverCityId);
+  const selectedOffer = offersByCity.find((offer) => offer.id === cityHover);
 
   const mainPageClass = classNames('page__main page__main--index',
     {
@@ -42,7 +39,7 @@ function MainPage({offers}: MainPageProps): JSX.Element {
                 <CardList offers={offersByCity} type={CardType.CITIES}/>
               </section>
               <div className="cities__right-section">
-                <Map selectedOffer={offersByCity[0]}
+                <Map selectedOffer={selectedOffer}
                   offers={offersByCity}
                 />
               </div>

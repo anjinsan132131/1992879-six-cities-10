@@ -2,7 +2,8 @@ import { Offer } from '../../types/offer-type';
 import Card from '../card/card';
 import classNames from 'classnames';
 import { CardType } from '../../constans';
-import { useState } from 'react';
+import { useAppDispatch } from '../../hooks';
+import { setHoverCityIdAction } from '../../store/action';
 
 type CardListProps = {
   type: string;
@@ -10,9 +11,11 @@ type CardListProps = {
 }
 
 function CardList({type, offers}: CardListProps): JSX.Element {
-  const [, setCardId] = useState<number>();
+  const dispatch = useAppDispatch();
 
-  const onMouseOver = (id: number) => setCardId(id);
+
+  const onMouseOver = (id: number) => dispatch(setHoverCityIdAction(id));
+  const onMouseLeave = () => dispatch(setHoverCityIdAction(null));
 
   const cardListClass = classNames(
     {
@@ -29,6 +32,7 @@ function CardList({type, offers}: CardListProps): JSX.Element {
           cardType={type}
           offer={offer}
           onMouseOver={onMouseOver}
+          onMouseLeave={onMouseLeave}
         />
       ))}
     </div>

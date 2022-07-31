@@ -17,6 +17,7 @@ const customIcon = (iconName: string) => new Icon({
 });
 
 function Map({selectedOffer, offers}: MapProps): JSX.Element {
+
   const mapRef = useRef(null);
   const layerGroupRef = useRef(new LayerGroup());
   const map = useMap(mapRef, offers[0].city);
