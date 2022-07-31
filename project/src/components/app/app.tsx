@@ -8,6 +8,8 @@ import RoomPage from '../../pages/room-page/room-page';
 import PrivateRoute from '../../components/private-route/private-route';
 import { Offer } from '../../types/offer-type';
 import { Review } from '../../types/review-type';
+import LoadingScreen from '../loading-screen/loading-screen';
+import { useAppSelector } from '../../hooks';
 
 type AppProps = {
   offers: Offer[];
@@ -15,6 +17,14 @@ type AppProps = {
 };
 
 function App({offers, reviews }: AppProps): JSX.Element {
+  const {isDataLoaded} = useAppSelector((state) => state);
+
+  if (isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>

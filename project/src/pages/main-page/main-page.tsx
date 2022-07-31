@@ -10,7 +10,7 @@ import MainEmpty from '../../components/main-empty/main-empty';
 import classNames from 'classnames';
 
 function MainPage(): JSX.Element {
-  const offersByCity = useAppSelector((state) => state.offers);
+  const offersByCity = useAppSelector((state) => state.offersByCity);
   const currentCity = useAppSelector((state) => state.city);
   const cityHover = useAppSelector((state) => state.hoverCityId);
   const selectedOffer = offersByCity.find((offer) => offer.id === cityHover);

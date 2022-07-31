@@ -17,6 +17,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
+export enum APIRoute {
+  Hotels = '/hotels',
+  HotelsId = '/hotels/{hotelId}',
+  HotelsIdNearby = '/hotels/{hotelId}/nearby'
+}
+
 export const RATING_DATA = [
   {
     rating: '5',
