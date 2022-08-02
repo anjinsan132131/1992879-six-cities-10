@@ -6,8 +6,8 @@ import { Offer } from '../../types/offer-type';
 type CardProps = {
   cardType: string;
   offer: Offer;
-  onMouseOver?: (cardId: number) => void;
-  onMouseLeave?: () => void;
+  onMouseOver: (cardId: number) => void;
+  onMouseLeave: () => void;
 }
 
 function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Element {
