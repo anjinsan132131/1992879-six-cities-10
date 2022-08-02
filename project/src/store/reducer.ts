@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, Cities } from '../constans';
 import { Offer } from '../types/offer-type';
+import { UserData } from '../types/user-data';
 import { getOffersByCity, getSortedOffers } from '../utils';
-import { sortValueAction, selectCityAction, setHoverCityIdAction, setOffersByCityAction, sortingCityAction, loadHotelsAction, requireAuthorization, setDataLoadedStatus } from './action';
+import { sortValueAction, selectCityAction, setHoverCityIdAction, setOffersByCityAction, sortingCityAction, loadHotelsAction, requireAuthorization, setDataLoadedStatus, setUser } from './action';
 
 const DEFAULT_CITY = Cities.Paris;
 
@@ -14,6 +15,7 @@ type InitialState = {
   hoverCityId: null;
   authorizationStatus: AuthorizationStatus;
   isDataLoaded: boolean;
+  user: UserData | null;
 }
 
 const initialState: InitialState = {
@@ -24,6 +26,7 @@ const initialState: InitialState = {
   hoverCityId: null,
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
+  user: null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -52,6 +55,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setUser, (state, action) => {
+      state.user = action.payload.user;
     });
 });
 

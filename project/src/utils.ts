@@ -1,4 +1,4 @@
-import { SORTING } from './constans';
+import { AuthorizationStatus, SORTING } from './constans';
 import { Offer } from './types/offer-type';
 
 export const getOffersByCity = (offers: Offer[], city: string) => offers.filter((offer) => offer.city.name === city);
@@ -26,4 +26,21 @@ export const getSortedOffers = (offers: Offer[], currentSort: string) => {
     default:
       return offers;
   }
+};
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Unknown;
+
+export const validatePassword = (password: string) => {
+
+  if(!password) {
+    return false;
+  }
+  const regExpLetter = /[A-Za-z]/;
+  const regExpNumber = /[0-9]/;
+
+  if(password.search(regExpLetter) > -1 && password.search(regExpNumber) > -1) {
+    return true;
+  }
+  return false;
 };

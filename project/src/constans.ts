@@ -20,7 +20,9 @@ export enum AuthorizationStatus {
 export enum APIRoute {
   Hotels = '/hotels',
   HotelsId = '/hotels/{hotelId}',
-  HotelsIdNearby = '/hotels/{hotelId}/nearby'
+  HotelsIdNearby = '/hotels/{hotelId}/nearby',
+  Login = '/login',
+  Logout = '/logout'
 }
 
 export const RATING_DATA = [
@@ -66,6 +68,8 @@ export const FORMAT_RREVIEW_DATE = 'MMM YYYY';
 export const FORMAT_DATE_TIME = 'YYYY-MM-D';
 
 export const COEFFICIENT_REVIEW_RATING = 0.05;
+
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const Cities = {
   Paris: 'Paris',

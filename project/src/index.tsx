@@ -5,9 +5,11 @@ import { OffersMock } from './mocks/offers';
 import { ReviewMock } from './mocks/review';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchHotelsnAction } from './store/api-action';
+import { checkAuthAction, fetchHotelsAction } from './store/api-action';
+import {ToastContainer} from 'react-toastify';
 
-store.dispatch(fetchHotelsnAction());
+store.dispatch(checkAuthAction());
+store.dispatch(fetchHotelsAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -16,6 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ToastContainer />
       <App
         offers = {OffersMock}
         reviews = {ReviewMock}
