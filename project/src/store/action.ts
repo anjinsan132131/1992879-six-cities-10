@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { Offer } from '../types/offer-type';
 import { AuthorizationStatus } from '../constans';
 import { UserData } from '../types/user-data';
+import { Review } from '../types/review-type';
 
 const Action = {
   SELECT_CITY: 'SELECT_CITY',
@@ -34,3 +35,9 @@ export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStat
 export const setError = createAction<string | null>('hotels/setError');
 
 export const setUser = createAction<{user: UserData | null}>('app/setUser');
+
+export const setOfferAction = createAction<Offer>('setOffer');
+
+export const setNearOfferAction = createAction<Offer[]>('nearOffer');
+
+export const setReviewAction = createAction<Review[]>('reviews');

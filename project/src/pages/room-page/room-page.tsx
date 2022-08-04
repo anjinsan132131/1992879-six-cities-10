@@ -1,19 +1,39 @@
+// import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Room from '../../components/room/room';
-import { Offer } from '../../types/offer-type';
-import { Review } from '../../types/review-type';
+// import { APIRoute, AppRoute, AuthorizationStatus } from '../../constans';
+// import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { fetchReviewsAction, fetchNearOfferAction, fetchOfferAction } from '../../store/api-action';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import PageNotFound from '../page-not-found/page-not-found';
+
+function RoomPage(): JSX.Element {
+  const { id } = useParams();
+  const offer = useAppSelector((state) => state.offer);
+  const nearOffers = useAppSelector((state) => state.nearOffers);
+  const reviews = useAppSelector((state) => state.reviews);
+  const dispatch = useAppDispatch();
 
 
-type RoomPageProps = {
-  offers: Offer[];
-  reviews: Review[];
-}
+  useEffect(() => {
+    if (!offer || offer?.id !== Number(id)) {
+      dispatch(fetchOfferAction(id as string));
+      dispatch(fetchNearOfferAction(id as string));
+      dispatch(fetchReviewsAction(id as string));
+    }
+  }, [id, dispatch]);
 
-function RoomPage({offers, reviews}: RoomPageProps): JSX.Element {
+  if (!offer) {
+    return <PageNotFound />;
+  }
+
+
   return (
     <div className="page">
       <Header isNavVisible/>
-      <Room offers={offers} reviews={reviews} />
+      {offer ? <Room offer={offer} nearOffers={nearOffers} reviews={reviews}/> : ''}
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { AuthorizationStatus, Cities } from '../constans';
 import { Offer } from '../types/offer-type';
+import { Review } from '../types/review-type';
 import { UserData } from '../types/user-data';
 import { getOffersByCity, getSortedOffers } from '../utils';
-import { sortValueAction, selectCityAction, setHoverCityIdAction, setOffersByCityAction, sortingCityAction, loadHotelsAction, requireAuthorization, setDataLoadedStatus, setUser } from './action';
+import { sortValueAction, selectCityAction, setHoverCityIdAction, setOffersByCityAction, sortingCityAction, loadHotelsAction, requireAuthorization, setDataLoadedStatus, setUser, setOfferAction, setNearOfferAction, setReviewAction } from './action';
 
 const DEFAULT_CITY = Cities.Paris;
 
@@ -16,6 +17,9 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus;
   isDataLoaded: boolean;
   user: UserData | null;
+  offer: Offer | null;
+  nearOffers: Offer[];
+  reviews: Review [];
 }
 
 const initialState: InitialState = {
@@ -27,6 +31,9 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
   user: null,
+  offer: null,
+  nearOffers: [],
+  reviews: []
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -57,7 +64,18 @@ const reducer = createReducer(initialState, (builder) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUser, (state, action) => {
+      // eslint-disable-next-line no-console
+      console.log('data', action);
       state.user = action.payload.user;
+    })
+    .addCase(setOfferAction, (state, action) => {
+      state.offer = action.payload;
+    })
+    .addCase(setNearOfferAction, (state, action) => {
+      state.nearOffers = action.payload;
+    })
+    .addCase(setReviewAction, (state, action) => {
+      state.reviews = action.payload;
     });
 });
 

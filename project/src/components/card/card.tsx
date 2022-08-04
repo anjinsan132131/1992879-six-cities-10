@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { CardType, AppRoute, COEFFICIENT_REVIEW_RATING } from '../../constans';
+import { CardType, COEFFICIENT_REVIEW_RATING } from '../../constans';
 import classNames from 'classnames';
 import { Offer } from '../../types/offer-type';
 
@@ -37,7 +37,7 @@ function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Elem
       ) : ''}
 
       <div className={imageClass}>
-        <Link to={AppRoute.Room}>
+        <Link to={`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width={cardType === CardType.FAVORITES ? '150' : '260'} height={cardType === CardType.FAVORITES ? '110' : '200'} alt="Place" />
         </Link>
       </div>
@@ -69,7 +69,7 @@ function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Elem
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={AppRoute.Room}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

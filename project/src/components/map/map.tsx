@@ -1,5 +1,6 @@
+import leaflet from 'leaflet';
 import { useRef, useEffect } from 'react';
-import { Icon, LayerGroup, Marker } from 'leaflet';
+import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from './useMap';
 import { Offer } from '../../types/offer-type';
@@ -17,32 +18,31 @@ const customIcon = (iconName: string) => new Icon({
 });
 
 function Map({selectedOffer, offers}: MapProps): JSX.Element {
-
   const mapRef = useRef(null);
-  const layerGroupRef = useRef(new LayerGroup());
-  const map = useMap(mapRef, offers[0].city);
+  const city = offers[0]?.city;
+  const map = useMap(mapRef, city);
 
   useEffect(() => {
-    const layerGroup = layerGroupRef.current;
     if (map) {
+      map.setView([city?.location.latitude, city?.location.longitude], city?.location.zoom);
       offers.forEach((offer) => {
-        const marker = new Marker({
-          lat: offer.location.latitude,
-          lng: offer.location.longitude
-        });
-
-        marker
-          .setIcon(selectedOffer !== undefined && offer.id === selectedOffer.id
-            ? customIcon(URL_MARKER_CURRENT)
-            : customIcon(URL_MARKER_DEFAULT))
-          .addTo(map);
+        leaflet
+          .marker({
+            lat: offer.location.latitude,
+            lng: offer.location.longitude,
+          }, {
+            icon: (selectedOffer === offer) ? customIcon(URL_MARKER_CURRENT) : customIcon(URL_MARKER_DEFAULT),
+          }).addTo(map);
       });
-      map.addLayer(layerGroup);
     }
     return () => {
-      layerGroup.clearLayers();
+      map?.eachLayer((it) => {
+        if (it.getPane()?.classList.contains('leaflet-marker-pane')) {
+          it.remove();
+        }
+      });
     };
-  }, [map, offers, selectedOffer]);
+  });
 
   return (
     <section
