@@ -64,8 +64,6 @@ const reducer = createReducer(initialState, (builder) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUser, (state, action) => {
-      // eslint-disable-next-line no-console
-      console.log('data', action);
       state.user = action.payload.user;
     })
     .addCase(setOfferAction, (state, action) => {

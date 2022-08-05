@@ -19,12 +19,12 @@ const customIcon = (iconName: string) => new Icon({
 
 function Map({selectedOffer, offers}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const city = offers[0]?.city;
+  const city = offers[0].city;
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
-      map.setView([city?.location.latitude, city?.location.longitude], city?.location.zoom);
+      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
       offers.forEach((offer) => {
         leaflet
           .marker({
