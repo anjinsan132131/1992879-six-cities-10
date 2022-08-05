@@ -33,14 +33,11 @@ export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean
 
 export const validatePassword = (password: string) => {
 
-  if(!password) {
+  if (!password) {
     return false;
   }
-  const regExpLetter = /[A-Za-z]/;
-  const regExpNumber = /[0-9]/;
 
-  if(password.search(regExpLetter) > -1 && password.search(regExpNumber) > -1) {
-    return true;
-  }
-  return false;
+  const regPassword = /(?=.*[0-9])/;
+
+  return password.search(regPassword) > -1;
 };
