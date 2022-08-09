@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constans';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { requireAuthorization } from '../../store/action';
+import { logoutAction } from '../../store/api-action';
+import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 import Logo from '../logo/logo';
 
 
@@ -10,8 +11,8 @@ type HeaderProps = {
 }
 
 function Header({isNavVisible}: HeaderProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const user = useAppSelector((state) => state.user);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const user = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
 
   return (
@@ -42,7 +43,7 @@ function Header({isNavVisible}: HeaderProps): JSX.Element {
                     <li className="header__nav-item">
                       <Link
                         to={AppRoute.Main}
-                        onClick={() => dispatch(requireAuthorization(AuthorizationStatus.NoAuth))}
+                        onClick={() => dispatch(logoutAction())}
                         className="header__nav-link"
                       >
                         <span className="header__signout">Sign out</span>

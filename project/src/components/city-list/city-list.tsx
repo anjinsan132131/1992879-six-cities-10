@@ -1,6 +1,6 @@
 import { SORTING } from '../../constans';
 import { useAppDispatch } from '../../hooks';
-import { sortValueAction, selectCityAction, setOffersByCityAction } from '../../store/action';
+import { selectCityAction, setOffersByCityAction, sortValueAction } from '../../store/offers-data/offers-data';
 import City from '../city/city';
 
 type CityListProps = {

@@ -20,6 +20,8 @@ const customIcon = (iconName: string) => new Icon({
 function Map({selectedOffer, offers}: MapProps): JSX.Element {
   const mapRef = useRef(null);
   const city = offers[0].city;
+  // eslint-disable-next-line no-console
+  console.log(city);
   const map = useMap(mapRef, city);
 
   useEffect(() => {

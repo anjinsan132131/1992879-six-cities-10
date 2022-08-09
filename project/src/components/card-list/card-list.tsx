@@ -3,7 +3,7 @@ import Card from '../card/card';
 import classNames from 'classnames';
 import { CardType } from '../../constans';
 import { useAppDispatch } from '../../hooks';
-import { setHoverCityIdAction } from '../../store/action';
+import { setHoverCityIdAction } from '../../store/offers-process/offers-process';
 
 type CardListProps = {
   type: string;

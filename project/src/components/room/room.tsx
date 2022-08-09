@@ -6,6 +6,7 @@ import { Review } from '../../types/review-type';
 import ReviewList from '../review-list/review-list';
 import Map from '../../components/map/map';
 import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 
 type RoomProps = {
@@ -15,7 +16,7 @@ type RoomProps = {
 }
 
 function Room({ nearOffers, reviews, offer }: RoomProps): JSX.Element {
-  const isAuth = useAppSelector((state) => state.authorizationStatus) === AuthorizationStatus.Auth;
+  const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
 
   const {images, id, title, isPremium, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
   const reviewRating = rating / COEFFICIENT_REVIEW_RATING;

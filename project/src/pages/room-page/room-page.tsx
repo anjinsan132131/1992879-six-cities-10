@@ -8,12 +8,13 @@ import { useEffect } from 'react';
 import { fetchReviewsAction, fetchNearOfferAction, fetchOfferAction } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import PageNotFound from '../page-not-found/page-not-found';
+import { getNearOffers, getOffer, getReviews } from '../../store/offers-data/selector';
 
 function RoomPage(): JSX.Element {
   const { id } = useParams();
-  const offer = useAppSelector((state) => state.offer);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const reviews = useAppSelector((state) => state.reviews);
+  const offer = useAppSelector(getOffer);
+  const nearOffers = useAppSelector(getNearOffers);
+  const reviews = useAppSelector(getReviews);
   const dispatch = useAppDispatch();
 
 
