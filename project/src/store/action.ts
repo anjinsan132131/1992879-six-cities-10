@@ -32,7 +32,7 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 
 export const setDataLoadedStatus = createAction<boolean>('data/setDataLoadedStatus');
 
-export const setError = createAction<string | null>('hotels/setError');
+export const setDataLoadingError = createAction<boolean>('hotel/setDataLoadingError');
 
 export const setUser = createAction<{user: UserData | null}>('app/setUser');
 

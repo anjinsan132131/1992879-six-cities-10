@@ -7,7 +7,7 @@ import { CommentPostData } from '../types/comment-data';
 import { Offer } from '../types/offer-type';
 import { Review } from '../types/review-type';
 import { UserData } from '../types/user-data';
-import { loadHotelsAction, redirectToRoute, requireAuthorization, setDataLoadedStatus, setNearOfferAction, setOfferAction, setReviewAction, setUser } from './action';
+import { loadHotelsAction, redirectToRoute, requireAuthorization, setDataLoadedStatus, setDataLoadingError, setNearOfferAction, setOfferAction, setReviewAction, setUser } from './action';
 import { AppDispatch, State } from './state';
 
 export const fetchHotelsAction = createAsyncThunk<void, undefined, {
@@ -76,10 +76,13 @@ export const fetchOfferAction = createAsyncThunk<void, string, {
   }>(
     'data/fetchOffer',
     async (id, {dispatch, extra: api}) => {
-      dispatch(setDataLoadedStatus(true));
-      const {data} = await api.get<Offer>(`/hotels/${id}`);
-      dispatch(setOfferAction(data));
-      dispatch(setDataLoadedStatus(false));
+      try {
+        const { data } = await api.get<Offer>(`/hotels/${id}`);
+        dispatch(setDataLoadingError(false));
+        dispatch(setOfferAction(data));
+      } catch {
+        dispatch(setDataLoadingError(true));
+      }
     }
   );
 
@@ -90,10 +93,8 @@ export const fetchNearOfferAction = createAsyncThunk<void, string, {
   }>(
     'data/fetchOffer',
     async (id, {dispatch, extra: api}) => {
-      dispatch(setDataLoadedStatus(true));
       const {data} = await api.get<Offer[]>(`/hotels/${id}/nearby`);
       dispatch(setNearOfferAction(data));
-      dispatch(setDataLoadedStatus(false));
     }
   );
 
@@ -104,10 +105,8 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
   }>(
     'data/fetchOffer',
     async (id, {dispatch, extra: api}) => {
-      dispatch(setDataLoadedStatus(true));
       const {data} = await api.get<Review[]>(`/comments/${id}`);
       dispatch(setReviewAction(data));
-      dispatch(setDataLoadedStatus(false));
     }
   );
 
