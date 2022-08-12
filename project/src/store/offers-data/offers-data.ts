@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Cities, NameSpace } from '../../constans';
 import { OffersData } from '../../types/state';
 import { getOffersByCity, getSortedOffers } from '../../utils';
-import { addCommentAction, fetchHotelsAction, fetchNearOfferAction, fetchOfferAction, fetchReviewsAction } from '../api-action';
+import { addCommentAction, changeFavoriteStatusAction, fetchFavoriteOffersAction, fetchHotelsAction, fetchNearOfferAction, fetchOfferAction, fetchReviewsAction } from '../api-action';
 
 const DEFAULT_CITY = Cities.Paris;
 
@@ -17,6 +17,7 @@ export const initialState: OffersData = {
   offer: null,
   nearOffers: [],
   reviews: [],
+  favoriteOffers: [],
 };
 
 export const offersData = createSlice({
@@ -69,6 +70,31 @@ export const offersData = createSlice({
       })
       .addCase(addCommentAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
+      })
+      .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        const id = action.payload.id;
+        // const offerId = state.allOffers.findIndex((offer) => offer.id === id);
+        // const nearOfferId = state.nearOffers.findIndex((offer) => offer.id === id);
+        const favoriteOfferId = state.favoriteOffers.findIndex((offer) => offer.id === id);
+
+        // if (nearOfferId !== -1) {
+        //   state.nearOffers[nearOfferId] = action.payload;
+        // }
+
+        // if (state.offer && id === state.offer.id) {
+        //   state.offer = action.payload;
+        // }
+
+        if (favoriteOfferId === -1) {
+          state.favoriteOffers.push(action.payload);
+        } else {
+          state.favoriteOffers = [...state.favoriteOffers.slice(0, favoriteOfferId), ...state.favoriteOffers.slice(favoriteOfferId + 1)];
+        }
+
+        // state.allOffers[offerId] = action.payload;
       });
   }
 });

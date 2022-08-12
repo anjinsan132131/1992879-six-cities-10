@@ -18,11 +18,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN'
 }
 
+
 export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
   Logout = '/logout',
-  Comment = '/comments/'
+  Comment = '/comments/',
+  Favorites = '/favorites/'
 }
 
 export const RATING_DATA = [

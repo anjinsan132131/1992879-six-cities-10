@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
-import { CardType, COEFFICIENT_REVIEW_RATING } from '../../constans';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus, CardType, COEFFICIENT_REVIEW_RATING } from '../../constans';
 import classNames from 'classnames';
 import { Offer } from '../../types/offer-type';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFavoriteOffersAction } from '../../store/api-action';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 type CardProps = {
   cardType: string;
@@ -13,6 +16,21 @@ type CardProps = {
 function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Element {
   const { id, rating, price, title, type, isPremium, previewImage, isFavorite } = offer;
   const cardRating = rating / COEFFICIENT_REVIEW_RATING;
+  const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleFavoriteButtonClick = () => {
+
+    (isAuth) ?
+      dispatch(fetchFavoriteOffersAction())
+      // dispatch(changeFavoriteStatusAction({
+      //   offerId: offer.id,
+      //   status: offer.isFavorite
+      // }))
+      : navigate(AppRoute.Login);
+  };
 
   const articleClass = classNames('place-card',
     {
@@ -56,7 +74,7 @@ function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Elem
               })}
             type="button"
           >
-            <svg className="place-card__bookmark-icon" width="18" height="19">
+            <svg className="place-card__bookmark-icon" width="18" height="19" onClick={handleFavoriteButtonClick}>
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">In bookmarks</span>

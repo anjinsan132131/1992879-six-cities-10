@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../constans';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-action';
+import { getFavoriteOffers } from '../../store/offers-data/selector';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/selectors';
 import Logo from '../logo/logo';
 
@@ -14,6 +15,9 @@ function Header({isNavVisible}: HeaderProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const user = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
+
+  const favoritesOffers = useAppSelector(getFavoriteOffers);
+  const quantityFavoritesOffers = favoritesOffers ? String(favoritesOffers.length) : '0';
 
   return (
     <header className="header">
@@ -37,7 +41,7 @@ function Header({isNavVisible}: HeaderProps): JSX.Element {
                       <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
                         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                         <span className="header__user-name user__name">{user?.email}</span>
-                        <span className="header__favorite-count">3</span>
+                        <span className="header__favorite-count">{AuthorizationStatus.Auth ? quantityFavoritesOffers : '0'}</span>
                       </Link>
                     </li>
                     <li className="header__nav-item">

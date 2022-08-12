@@ -19,6 +19,7 @@ export type OffersData = {
   offer: Offer | null,
   nearOffers: Offer[],
   reviews: Review[],
+  favoriteOffers: Offer[],
 }
 
 export type OffersProcess = {
