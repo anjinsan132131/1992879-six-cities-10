@@ -8,7 +8,8 @@ export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Main = '/',
-  Room = '/offer/:id'
+  Room = '/offer/:id',
+  NotFoundPage = '*'
 }
 
 export enum AuthorizationStatus {
@@ -19,10 +20,9 @@ export enum AuthorizationStatus {
 
 export enum APIRoute {
   Hotels = '/hotels',
-  HotelsId = '/hotels/{hotelId}',
-  HotelsIdNearby = '/hotels/{hotelId}/nearby',
   Login = '/login',
-  Logout = '/logout'
+  Logout = '/logout',
+  Comment = '/comments/'
 }
 
 export const RATING_DATA = [
