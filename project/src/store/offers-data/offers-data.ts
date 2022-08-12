@@ -17,6 +17,7 @@ export const initialState: OffersData = {
   offer: null,
   nearOffers: [],
   reviews: [],
+  isLoadingError: false
 };
 
 export const offersData = createSlice({
@@ -51,7 +52,10 @@ export const offersData = createSlice({
       })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
-        state.isCurrentOfferLoaded = false;
+        state.isLoadingError = false;
+      })
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.isLoadingError = true;
       })
       .addCase(fetchNearOfferAction.pending, (state) => {
         state.isCurrentOfferLoaded = true;

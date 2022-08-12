@@ -19,6 +19,7 @@ export type OffersData = {
   offer: Offer | null,
   nearOffers: Offer[],
   reviews: Review[],
+  isLoadingError: boolean;
 }
 
 export type OffersProcess = {
