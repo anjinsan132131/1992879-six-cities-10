@@ -13,11 +13,11 @@ export const initialState: OffersData = {
   allOffers: [],
   offersByCity: [],
   isDataLoaded: false,
-  isCurrentOfferLoaded: false,
   offer: null,
   nearOffers: [],
   reviews: [],
   favoriteOffers: [],
+  isLoadingError: false
 };
 
 export const offersData = createSlice({
@@ -47,26 +47,18 @@ export const offersData = createSlice({
         state.offersByCity = getOffersByCity(state.allOffers, state.city);
         state.isDataLoaded = false;
       })
-      .addCase(fetchOfferAction.pending, (state) => {
-        state.isDataLoaded = true;
-      })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
-        state.isCurrentOfferLoaded = false;
+        state.isLoadingError = false;
       })
-      .addCase(fetchNearOfferAction.pending, (state) => {
-        state.isCurrentOfferLoaded = true;
+      .addCase(fetchOfferAction.rejected, (state) => {
+        state.isLoadingError = true;
       })
       .addCase(fetchNearOfferAction.fulfilled, (state, action) => {
         state.nearOffers = action.payload;
-        state.isDataLoaded = false;
-      })
-      .addCase(fetchReviewsAction.pending, (state) => {
-        state.isDataLoaded = true;
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
-        state.isDataLoaded = false;
       })
       .addCase(addCommentAction.fulfilled, (state, action) => {
         state.reviews = action.payload;

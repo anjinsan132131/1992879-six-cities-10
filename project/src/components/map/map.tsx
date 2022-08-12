@@ -17,11 +17,18 @@ const customIcon = (iconName: string) => new Icon({
   iconAnchor: [20, 40]
 });
 
+const defaultCity = {
+  location: {
+    latitude: 48.85661,
+    longitude: 2.351499,
+    zoom: 13
+  },
+  name: 'Paris'
+};
+
 function Map({selectedOffer, offers}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-  const city = offers[0].city;
-  // eslint-disable-next-line no-console
-  console.log(city);
+  const city = (offers.length !== 0) ? offers[0]?.city : defaultCity;
   const map = useMap(mapRef, city);
 
   useEffect(() => {

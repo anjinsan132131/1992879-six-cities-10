@@ -2,7 +2,6 @@ import { State } from '../../types/state';
 import { NameSpace } from '../../constans';
 import { Offer } from '../../types/offer-type';
 import { Review } from '../../types/review-type';
-// import { createSelector } from '@reduxjs/toolkit';
 
 export const getSelectedCity = (state: State): string => state[NameSpace.Data].city;
 export const getSortValue = (state: State): string => state[NameSpace.Data].sortValue;
@@ -13,13 +12,4 @@ export const getOffer = (state: State): Offer | null => state[NameSpace.Data].of
 export const getNearOffers = (state: State): Offer[] => state[NameSpace.Data].nearOffers;
 export const getReviews = (state: State): Review[] => state[NameSpace.Data].reviews;
 export const getFavoriteOffers = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
-
-// export const filterSity = createSelector (
-//   [getSortValue, getSelectedCity],
-//   (offers, currentCity) => {
-//     if(offers) {
-//       offers.filter((offer: Offer) => offer.city.name === currentCity);
-//     }
-//     return [];
-//   }
-// );
+export const getLoadingError = (state: State): boolean => state[NameSpace.Data].isLoadingError;
