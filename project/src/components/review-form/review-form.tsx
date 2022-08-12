@@ -10,7 +10,7 @@ type ReviewStateData = {
 }
 
 function ReviewForm(): JSX.Element {
-  const { id } = useParams();
+  const { id } = useParams() as { id: string };
   const dispatch = useAppDispatch();
   const [reviewData, setReviewData] = useState<ReviewStateData>({comment: '', rating: ''});
 
@@ -31,7 +31,7 @@ function ReviewForm(): JSX.Element {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     dispatch(addCommentAction({
-      offerId: id as string,
+      offerId: id,
       commentData:   {
         comment: reviewData.comment,
         rating: +reviewData.rating
