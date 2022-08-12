@@ -5,14 +5,16 @@ import Map from '../../components/map/map';
 import { CardType } from '../../constans';
 import CardList from '../../components/card-list/card-list';
 import { Cities } from '../../constans';
-import { useAppSelector } from '../../hooks';
 import MainEmpty from '../../components/main-empty/main-empty';
 import classNames from 'classnames';
+import { getOffersByChoosenCity, getSelectedCity } from '../../store/offers-data/selector';
+import { getActiveOffer } from '../../store/offers-process/selectors';
+import { useAppSelector } from '../../hooks';
 
 function MainPage(): JSX.Element {
-  const offersByCity = useAppSelector((state) => state.offersByCity);
-  const currentCity = useAppSelector((state) => state.city);
-  const cityHover = useAppSelector((state) => state.hoverCityId);
+  const offersByCity = useAppSelector(getOffersByChoosenCity);
+  const currentCity = useAppSelector(getSelectedCity);
+  const cityHover = useAppSelector(getActiveOffer);
   const selectedOffer = offersByCity.find((offer) => offer.id === cityHover);
 
   const mainPageClass = classNames('page__main page__main--index',

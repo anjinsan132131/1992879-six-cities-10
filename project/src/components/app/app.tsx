@@ -12,6 +12,7 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks';
 import { browserHistory } from '../../browser-history';
 import { HistoryRouter } from '../history-route/history-route';
+import { getIsDataLoadedValue } from '../../store/offers-data/selector';
 
 type AppProps = {
   offers: Offer[];
@@ -19,7 +20,7 @@ type AppProps = {
 };
 
 function App({offers, reviews }: AppProps): JSX.Element {
-  const {isDataLoaded} = useAppSelector((state) => state);
+  const isDataLoaded = useAppSelector(getIsDataLoadedValue);
 
   if (isDataLoaded) {
     return (

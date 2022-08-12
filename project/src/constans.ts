@@ -86,3 +86,9 @@ export const SORTING = {
   PRICE_HIGH_TO_LOW: 'Price: high to low',
   TOP_RATED_FIRST: 'Top rated first'
 };
+
+export enum NameSpace {
+  Data = 'DATA',
+  Offers = 'OFFERS',
+  User = 'USER',
+}

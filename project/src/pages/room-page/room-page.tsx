@@ -5,14 +5,16 @@ import { useEffect } from 'react';
 import { fetchReviewsAction, fetchNearOfferAction, fetchOfferAction } from '../../store/api-action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import PageNotFound from '../page-not-found/page-not-found';
+import { getLoadingError, getNearOffers, getOffer, getReviews } from '../../store/offers-data/selector';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function RoomPage(): JSX.Element {
   const { id } = useParams() as { id: string };
-  const offer = useAppSelector((state) => state.offer);
-  const nearOffers = useAppSelector((state) => state.nearOffers);
-  const reviews = useAppSelector((state) => state.reviews);
-  const isLoadingError = useAppSelector((state) => state.isLoadingError);
+  const offer = useAppSelector(getOffer);
+  const nearOffers = useAppSelector(getNearOffers);
+  const reviews = useAppSelector(getReviews);
+  const isLoadingError = useAppSelector(getLoadingError);
+
   const dispatch = useAppDispatch();
 
 

@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { SORTING } from '../../constans';
 import SortingItem from '../sorting-item/sorting-item';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sortValueAction, sortingCityAction } from '../../store/action';
+import { getSortValue } from '../../store/offers-data/selector';
+import { sortingCityAction, sortValueAction } from '../../store/offers-data/offers-data';
 
 function Sorting(): JSX.Element {
   const [isFormOpened, setIsFormOpened] = useState(false);
 
   const dispatch = useAppDispatch();
 
-  const currentSort = useAppSelector((state) => state.sortValue);
+  const currentSort = useAppSelector(getSortValue);
 
   const clickHandler = () => {
     setIsFormOpened(!isFormOpened);
