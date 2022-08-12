@@ -15,7 +15,6 @@ export type OffersData = {
   allOffers: Offer[],
   offersByCity: Offer[],
   isDataLoaded: boolean,
-  isCurrentOfferLoaded: boolean,
   offer: Offer | null,
   nearOffers: Offer[],
   reviews: Review[],
