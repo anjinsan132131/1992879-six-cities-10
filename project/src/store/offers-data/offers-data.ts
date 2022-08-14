@@ -6,7 +6,6 @@ import { addCommentAction, changeFavoriteStatusAction, fetchFavoriteOffersAction
 
 const DEFAULT_CITY = Cities.Paris;
 
-
 export const initialState: OffersData = {
   city: DEFAULT_CITY,
   sortValue: 'Popular',
@@ -17,7 +16,8 @@ export const initialState: OffersData = {
   nearOffers: [],
   reviews: [],
   favoriteOffers: [],
-  isLoadingError: false
+  isLoadingError: false,
+  reloadFavorites: false
 };
 
 export const offersData = createSlice({
@@ -35,6 +35,9 @@ export const offersData = createSlice({
     },
     sortingCityAction: (state) => {
       state.offersByCity = getSortedOffers(getOffersByCity(state.allOffers, state.city), state.sortValue);
+    },
+    clearFavoriteOffers: (state) => {
+      state.favoriteOffers = [];
     }
   },
   extraReducers(builder) {
@@ -65,28 +68,23 @@ export const offersData = createSlice({
       })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
+        state.reloadFavorites = false;
+      })
+      .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+        state.reloadFavorites = false;
+      })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.reloadFavorites = true;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
-        const id = action.payload.id;
-        // const offerId = state.allOffers.findIndex((offer) => offer.id === id);
-        // const nearOfferId = state.nearOffers.findIndex((offer) => offer.id === id);
-        const favoriteOfferId = state.favoriteOffers.findIndex((offer) => offer.id === id);
-
-        // if (nearOfferId !== -1) {
-        //   state.nearOffers[nearOfferId] = action.payload;
-        // }
-
-        // if (state.offer && id === state.offer.id) {
-        //   state.offer = action.payload;
-        // }
-
-        if (favoriteOfferId === -1) {
-          state.favoriteOffers.push(action.payload);
+        if (action.payload.isFavorite === false) {
+          state.favoriteOffers = state.favoriteOffers.filter(({ id }) => id !== action.payload.id);
         } else {
-          state.favoriteOffers = [...state.favoriteOffers.slice(0, favoriteOfferId), ...state.favoriteOffers.slice(favoriteOfferId + 1)];
+          state.favoriteOffers = [...state.favoriteOffers, action.payload];
         }
-
-        // state.allOffers[offerId] = action.payload;
+        state.allOffers = state.allOffers.map((offer) => offer.id === action.payload.id ? { ...offer, isFavorite: action.payload.isFavorite } : offer);
+        state.offersByCity = getOffersByCity(state.allOffers, state.city);
+        state.offer = action.payload;
       });
   }
 });

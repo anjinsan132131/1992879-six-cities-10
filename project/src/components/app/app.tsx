@@ -17,9 +17,10 @@ import { getIsDataLoadedValue } from '../../store/offers-data/selector';
 type AppProps = {
   offers: Offer[];
   reviews: Review[];
+  type: string;
 };
 
-function App({offers, reviews }: AppProps): JSX.Element {
+function App({offers, reviews, type }: AppProps): JSX.Element {
   const isDataLoaded = useAppSelector(getIsDataLoadedValue);
 
   if (isDataLoaded) {
@@ -35,20 +36,12 @@ function App({offers, reviews }: AppProps): JSX.Element {
           path={AppRoute.Main}
           element={<MainPage />}
         />
-
+        <Route path={AppRoute.Login} element={<LoginPage />} />
         <Route
           path={AppRoute.Favorites}
           element={
             <PrivateRoute>
-              <FavoritesPage offers={offers}/>
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Login}
-          element={
-            <PrivateRoute>
-              <LoginPage />
+              <FavoritesPage/>
             </PrivateRoute>
           }
         />

@@ -42,7 +42,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   }>(
     'user/login',
     async ({login: email, password}, {dispatch, extra: api}) => {
-      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      const { data } = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(data.token);
       dispatch(redirectToRoute(AppRoute.Main));
       return data;
@@ -68,7 +68,7 @@ export const fetchOfferAction = createAsyncThunk<Offer, string, {
   }>(
     'data/fetchOffer',
     async (id, {extra: api}) => {
-      const {data} = await api.get<Offer>(`/hotels/${id}`);
+      const { data } = await api.get<Offer>(`/hotels/${id}`);
       return data;
     }
   );
@@ -80,7 +80,7 @@ export const fetchNearOfferAction = createAsyncThunk<Offer[], string, {
   }>(
     'data/fetchNearOffer',
     async (id, {extra: api}) => {
-      const {data} = await api.get<Offer[]>(`/hotels/${id}/nearby`);
+      const { data } = await api.get<Offer[]>(`/hotels/${id}/nearby`);
       return data;
     }
   );
@@ -92,7 +92,7 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string, {
   }>(
     'data/fetchReview',
     async (id, {extra: api}) => {
-      const {data} = await api.get<Review[]>(`/comments/${id}`);
+      const { data } = await api.get<Review[]>(`/comments/${id}`);
       return data;
     }
   );
@@ -114,7 +114,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
   }>(
     'data/fetchFavoriteOffers',
     async (_arg, {extra: api}) => {
-      const { data } = await api.get<Offer[]>(APIRoute.Favorites);
+      const { data } = await api.get<Offer[]>(`${APIRoute.Favorites}`);
       return data;
     }
   );
@@ -125,9 +125,8 @@ export const changeFavoriteStatusAction = createAsyncThunk<Offer, FavoriteStatus
     extra: AxiosInstance,
   }>(
     'data/changeFavoriteStatus',
-    async ({id, status}, {dispatch, extra: api}) => {
-      const {data} = await api.post<Offer>(`${APIRoute.Favorites}/${id}`);
-      dispatch(fetchFavoriteOffersAction());
+    async ({id, status}, {extra: api}) => {
+      const { data } = await api.post<Offer>(`${APIRoute.Favorites}${id}/${status}`);
       return data;
     },
   );

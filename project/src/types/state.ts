@@ -19,7 +19,8 @@ export type OffersData = {
   nearOffers: Offer[],
   reviews: Review[],
   favoriteOffers: Offer[],
-  isLoadingError: boolean;
+  isLoadingError: boolean,
+  reloadFavorites: boolean
 }
 
 export type OffersProcess = {

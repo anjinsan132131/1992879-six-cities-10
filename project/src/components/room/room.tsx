@@ -1,13 +1,15 @@
-import { AuthorizationStatus, CardType, COEFFICIENT_REVIEW_RATING } from '../../constans';
+import { AppRoute, AuthorizationStatus, CardType, COEFFICIENT_REVIEW_RATING } from '../../constans';
 import { Offer } from '../../types/offer-type';
 import CardList from '../card-list/card-list';
 import ReviewForm from '../review-form/review-form';
 import { Review } from '../../types/review-type';
 import ReviewList from '../review-list/review-list';
 import Map from '../../components/map/map';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-
+import { useNavigate } from 'react-router-dom';
+import { changeFavoriteStatusAction } from '../../store/api-action';
+import classNames from 'classnames';
 
 type RoomProps = {
   offer: Offer,
@@ -18,8 +20,25 @@ type RoomProps = {
 function Room({ nearOffers, reviews, offer }: RoomProps): JSX.Element {
   const isAuth = useAppSelector(getAuthorizationStatus) === AuthorizationStatus.Auth;
 
-  const {images, id, title, isPremium, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
+  const { images, id, title, isPremium, rating, type, bedrooms, maxAdults, price, goods, host, description, isFavorite } = offer;
   const reviewRating = rating / COEFFICIENT_REVIEW_RATING;
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    (isAuth) ?
+      dispatch(changeFavoriteStatusAction({
+        id,
+        status: isFavorite ? 0 : 1
+      }))
+      : navigate(AppRoute.Login);
+  };
+
+  const favoriveIconClass = classNames('property__bookmark-icon',
+    {
+      'place-card__bookmark-icon': isFavorite,
+    });
 
   return (
     <main className="page__main page__main--property">
@@ -45,8 +64,8 @@ function Room({ nearOffers, reviews, offer }: RoomProps): JSX.Element {
               <h1 className="property__name">
                 {title}
               </h1>
-              <button className="property__bookmark-button button" type="button">
-                <svg className="property__bookmark-icon" width="31" height="33">
+              <button className="property__bookmark-button property__bookmark-button--active button" type="button" onClick={handleClick}>
+                <svg className={favoriveIconClass} width="31" height="33">
                   <use xlinkHref="#icon-bookmark"></use>
                 </svg>
                 <span className="visually-hidden">To bookmarks</span>

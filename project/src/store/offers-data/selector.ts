@@ -12,4 +12,5 @@ export const getOffer = (state: State): Offer | null => state[NameSpace.Data].of
 export const getNearOffers = (state: State): Offer[] => state[NameSpace.Data].nearOffers;
 export const getReviews = (state: State): Review[] => state[NameSpace.Data].reviews;
 export const getFavoriteOffers = (state: State): Offer[] => state[NameSpace.Data].favoriteOffers;
+export const getFavoriteReloadStatus = (state: State) => state[NameSpace.Data].reloadFavorites;
 export const getLoadingError = (state: State): boolean => state[NameSpace.Data].isLoadingError;

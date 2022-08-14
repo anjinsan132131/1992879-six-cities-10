@@ -11,7 +11,7 @@ function PageNotFound(): JSX.Element {
           <Header isNavVisible={false} />
           <h1>404</h1>
           <h2>Page not found</h2>
-          <Link className={styles.link}to="/">Back to home page</Link>
+          <Link className={styles.link} to="/">Back to home page</Link>
         </section>
       </div>
     </main>

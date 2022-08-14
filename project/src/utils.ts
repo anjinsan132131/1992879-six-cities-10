@@ -41,3 +41,6 @@ export const validatePassword = (password: string) => {
 
   return password.search(regPassword) > -1;
 };
+
+export const isAuth = (authorizationStatus: AuthorizationStatus): boolean =>
+  authorizationStatus === AuthorizationStatus.Auth;

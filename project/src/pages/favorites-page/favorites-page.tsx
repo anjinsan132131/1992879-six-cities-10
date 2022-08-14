@@ -1,34 +1,52 @@
 import Header from '../../components/header/header';
-import LocationItem from '../../components/location-item/location-item';
 import Footer from '../../components/footer/footer';
-import { CardType } from '../../constans';
-import { Offer } from '../../types/offer-type';
+import { useAppSelector } from '../../hooks';
+import { getFavoriteOffers } from '../../store/offers-data/selector';
+import LocationItem from '../../components/location-item/location-item';
 import CardList from '../../components/card-list/card-list';
+import { CardType } from '../../constans';
+import React from 'react';
+import classNames from 'classnames';
+import FavoritesNotFound from '../../components/favoritse-not-found/favorites-not-found';
 
-type FavoritesPageProps = {
-  offers: Offer[];
-}
+function FavoritesPage(): JSX.Element {
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const favoriteOffersObject = Object.fromEntries(favoriteOffers.map(
+    (offer) => [offer.city.name, favoriteOffers.filter((favoriteOffer) => favoriteOffer.city.name === offer.city.name)]
+  ));
 
-function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
+  const mainPageClass = classNames('page__main page__main--favorites',
+    {
+      'page__main--favorites-empty': !favoriteOffers.length,
+    });
+
+  const sectionClass = classNames('favorites',
+    {
+      'favorites--empty': !favoriteOffers.length,
+    });
+
   return (
     <div className="page">
       <Header isNavVisible/>
 
-      <main className="page__main page__main--favorites">
+      <main className={mainPageClass}>
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <LocationItem/>
-                <CardList offers={offers} type={CardType.FAVORITES}/>
-              </li>
-
-              <li className="favorites__locations-items">
-                <LocationItem/>
-                <CardList offers={offers} type={CardType.FAVORITES}/>
-              </li>
-            </ul>
+          <section className={sectionClass}>
+            {favoriteOffers.length ? (
+              <React.Fragment>
+                <h1 className="favorites__title">Saved listing</h1>
+                <ul className="favorites__list">
+                  {Object.keys(favoriteOffersObject).map((item) => (
+                    <li key={item} className="favorites__locations-items">
+                      <LocationItem city={item} />
+                      <CardList offers={favoriteOffersObject[item]} type={CardType.FAVORITES} />
+                    </li>
+                  ))}
+                </ul>
+              </React.Fragment>
+            ) : (
+              <FavoritesNotFound />
+            )}
           </section>
         </div>
       </main>

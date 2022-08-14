@@ -4,12 +4,13 @@ export const CardType = {
   NEAR_PLACES: 'near-places'
 };
 
+
 export enum AppRoute {
   Login = '/login',
   Favorites = '/favorites',
   Main = '/',
   Room = '/offer/:id',
-  NotFoundPage = '*'
+  NotFoundPage = '*',
 }
 
 export enum AuthorizationStatus {
@@ -24,7 +25,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Comment = '/comments/',
-  Favorites = '/favorites/'
+  Favorites = '/favorite/'
 }
 
 export const RATING_DATA = [

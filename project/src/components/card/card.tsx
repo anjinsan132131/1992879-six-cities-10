@@ -3,7 +3,7 @@ import { AppRoute, AuthorizationStatus, CardType, COEFFICIENT_REVIEW_RATING } fr
 import classNames from 'classnames';
 import { Offer } from '../../types/offer-type';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchFavoriteOffersAction } from '../../store/api-action';
+import { changeFavoriteStatusAction } from '../../store/api-action';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 type CardProps = {
@@ -21,14 +21,12 @@ function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Elem
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleFavoriteButtonClick = () => {
-
+  const handleClick = () => {
     (isAuth) ?
-      dispatch(fetchFavoriteOffersAction())
-      // dispatch(changeFavoriteStatusAction({
-      //   offerId: offer.id,
-      //   status: offer.isFavorite
-      // }))
+      dispatch(changeFavoriteStatusAction({
+        id,
+        status: isFavorite ? 0 : 1
+      }))
       : navigate(AppRoute.Login);
   };
 
@@ -73,8 +71,9 @@ function Card({cardType, offer, onMouseOver, onMouseLeave}: CardProps): JSX.Elem
                 'place-card__bookmark-button--active': isFavorite
               })}
             type="button"
+            onClick={handleClick}
           >
-            <svg className="place-card__bookmark-icon" width="18" height="19" onClick={handleFavoriteButtonClick}>
+            <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
             <span className="visually-hidden">In bookmarks</span>

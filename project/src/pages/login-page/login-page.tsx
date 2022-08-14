@@ -1,8 +1,17 @@
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Login from '../../components/login/login';
+import { AppRoute, AuthorizationStatus } from '../../constans';
+import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function LoginPage(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Main} />;
+  }
+
   return(
     <div className="page page--gray page--login">
       <Header isNavVisible={false}/>
@@ -12,7 +21,7 @@ function LoginPage(): JSX.Element {
           <Login/>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" to="#">
+              <Link className="locations__item-link" to={AppRoute.Main}>
                 <span>Amsterdam</span>
               </Link>
             </div>
