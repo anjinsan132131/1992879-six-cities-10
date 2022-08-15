@@ -4,6 +4,7 @@ import { APIRoute, AppRoute } from '../constans';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { CommentPostData } from '../types/comment-data';
+import { FavoriteStatus } from '../types/favorite';
 import { Offer } from '../types/offer-type';
 import { Review } from '../types/review-type';
 import { UserData } from '../types/user-data';
@@ -16,7 +17,7 @@ export const fetchHotelsAction = createAsyncThunk<Offer[], undefined, {
   extra: AxiosInstance
 }>(
   'data/loadHotelsAction',
-  async (_arg, {dispatch, extra: api}) => {
+  async (_arg, {extra: api}) => {
     const { data } = await api.get<Offer[]>(APIRoute.Hotels);
     return data;
   },
@@ -28,7 +29,7 @@ export const checkAuthAction = createAsyncThunk<UserData, undefined, {
     extra: AxiosInstance
   }>(
     'user/checkAuth',
-    async (_arg, {dispatch, extra: api}) => {
+    async (_arg, {extra: api}) => {
       const { data } = await api.get(APIRoute.Login);
       return data;
     },
@@ -41,7 +42,7 @@ export const loginAction = createAsyncThunk<UserData, AuthData, {
   }>(
     'user/login',
     async ({login: email, password}, {dispatch, extra: api}) => {
-      const {data} = await api.post<UserData>(APIRoute.Login, {email, password});
+      const { data } = await api.post<UserData>(APIRoute.Login, {email, password});
       saveToken(data.token);
       dispatch(redirectToRoute(AppRoute.Main));
       return data;
@@ -54,7 +55,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     extra: AxiosInstance
   }>(
     'user/logout',
-    async (_arg, {dispatch, extra: api}) => {
+    async (_arg, {extra: api}) => {
       await api.delete(APIRoute.Logout);
       dropToken();
     },
@@ -66,8 +67,8 @@ export const fetchOfferAction = createAsyncThunk<Offer, string, {
     extra: AxiosInstance
   }>(
     'data/fetchOffer',
-    async (id, {dispatch, extra: api}) => {
-      const {data} = await api.get<Offer>(`/hotels/${id}`);
+    async (id, {extra: api}) => {
+      const { data } = await api.get<Offer>(`/hotels/${id}`);
       return data;
     }
   );
@@ -78,8 +79,8 @@ export const fetchNearOfferAction = createAsyncThunk<Offer[], string, {
     extra: AxiosInstance
   }>(
     'data/fetchNearOffer',
-    async (id, {dispatch, extra: api}) => {
-      const {data} = await api.get<Offer[]>(`/hotels/${id}/nearby`);
+    async (id, {extra: api}) => {
+      const { data } = await api.get<Offer[]>(`/hotels/${id}/nearby`);
       return data;
     }
   );
@@ -90,8 +91,8 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string, {
     extra: AxiosInstance
   }>(
     'data/fetchReview',
-    async (id, {dispatch, extra: api}) => {
-      const {data} = await api.get<Review[]>(`/comments/${id}`);
+    async (id, {extra: api}) => {
+      const { data } = await api.get<Review[]>(`/comments/${id}`);
       return data;
     }
   );
@@ -100,8 +101,32 @@ export const addCommentAction = createAsyncThunk<Review[], CommentPostData, {
     dispatch: AppDispatch, state: State, extra: AxiosInstance
   }>(
     'addComment',
-    async ({offerId, commentData}, {dispatch, extra: api}) => {
+    async ({offerId, commentData}, {extra: api}) => {
       const { data } = await api.post<Review[]>(`${APIRoute.Comment}${offerId}`, commentData);
+      return data;
+    },
+  );
+
+export const fetchFavoriteOffersAction = createAsyncThunk<Offer[], undefined, {
+    dispatch: AppDispatch,
+    state: State,
+    extra: AxiosInstance,
+  }>(
+    'data/fetchFavoriteOffers',
+    async (_arg, {extra: api}) => {
+      const { data } = await api.get<Offer[]>(`${APIRoute.Favorites}`);
+      return data;
+    }
+  );
+
+export const changeFavoriteStatusAction = createAsyncThunk<Offer, FavoriteStatus, {
+    dispatch: AppDispatch,
+    state: State,
+    extra: AxiosInstance,
+  }>(
+    'data/changeFavoriteStatus',
+    async ({id, status}, {extra: api}) => {
+      const { data } = await api.post<Offer>(`${APIRoute.Favorites}${id}/${status}`);
       return data;
     },
   );

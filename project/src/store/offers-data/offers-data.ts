@@ -2,10 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Cities, NameSpace } from '../../constans';
 import { OffersData } from '../../types/state';
 import { getOffersByCity, getSortedOffers } from '../../utils';
-import { addCommentAction, fetchHotelsAction, fetchNearOfferAction, fetchOfferAction, fetchReviewsAction } from '../api-action';
+import { addCommentAction, changeFavoriteStatusAction, fetchFavoriteOffersAction, fetchHotelsAction, fetchNearOfferAction, fetchOfferAction, fetchReviewsAction } from '../api-action';
 
 const DEFAULT_CITY = Cities.Paris;
-
 
 export const initialState: OffersData = {
   city: DEFAULT_CITY,
@@ -16,7 +15,9 @@ export const initialState: OffersData = {
   offer: null,
   nearOffers: [],
   reviews: [],
-  isLoadingError: false
+  favoriteOffers: [],
+  isLoadingError: false,
+  reloadFavorites: false
 };
 
 export const offersData = createSlice({
@@ -34,6 +35,9 @@ export const offersData = createSlice({
     },
     sortingCityAction: (state) => {
       state.offersByCity = getSortedOffers(getOffersByCity(state.allOffers, state.city), state.sortValue);
+    },
+    clearFavoriteOffers: (state) => {
+      state.favoriteOffers = [];
     }
   },
   extraReducers(builder) {
@@ -61,6 +65,26 @@ export const offersData = createSlice({
       })
       .addCase(addCommentAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
+      })
+      .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
+        state.favoriteOffers = action.payload;
+        state.reloadFavorites = false;
+      })
+      .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+        state.reloadFavorites = false;
+      })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.reloadFavorites = true;
+      })
+      .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
+        if (action.payload.isFavorite === false) {
+          state.favoriteOffers = state.favoriteOffers.filter(({ id }) => id !== action.payload.id);
+        } else {
+          state.favoriteOffers = [...state.favoriteOffers, action.payload];
+        }
+        state.allOffers = state.allOffers.map((offer) => offer.id === action.payload.id ? { ...offer, isFavorite: action.payload.isFavorite } : offer);
+        state.offersByCity = getOffersByCity(state.allOffers, state.city);
+        state.offer = action.payload;
       });
   }
 });
