@@ -26,7 +26,7 @@ function RoomPage(): JSX.Element {
     }
   }, [id, offer, dispatch]);
 
-  if (id && (offer === null || offer.id !== Number(id))) {
+  if (id && offer === null) {
     if (isLoadingError) {
       return <PageNotFound />;
     }

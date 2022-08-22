@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { OffersMock } from './mocks/offers';
-import { ReviewMock } from './mocks/review';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { checkAuthAction, fetchFavoriteOffersAction, fetchHotelsAction } from './store/api-action';
 import {ToastContainer} from 'react-toastify';
+import { HistoryRouter } from './components/history-route/history-route';
+import { browserHistory } from './browser-history';
 
 store.dispatch(checkAuthAction());
 store.dispatch(fetchHotelsAction());
@@ -19,12 +19,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer />
-      <App
-        offers = {OffersMock}
-        reviews = {ReviewMock}
-        type = {''}
-      />
+      <HistoryRouter history={browserHistory}>
+        <ToastContainer />
+        <App />
+      </HistoryRouter>
     </Provider>
   </React.StrictMode>,
 );
