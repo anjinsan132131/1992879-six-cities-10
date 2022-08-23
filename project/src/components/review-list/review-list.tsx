@@ -1,17 +1,18 @@
 import ReviewItem from '../review-item/review-item';
 import { Review } from '../../types/review-type';
-import dayjs from 'dayjs';
-
-const sortReviewBydata = (a:Review, b:Review) => dayjs(b.date).diff(dayjs(a.date));
+import { sortReviewBydata } from '../../utils';
+import { MAX_REVIEW_QUANTITY } from '../../constans';
 
 type ReviewListProps = {
   reviews: Review[];
 }
 
 function ReviewList({reviews}: ReviewListProps): JSX.Element {
+  const sortedReviews = [...reviews].sort(sortReviewBydata).slice(0, MAX_REVIEW_QUANTITY);
+
   return (
     <ul className="reviews__list">
-      {[...reviews].sort(sortReviewBydata).slice(0, 10).map((element) => (
+      {sortedReviews.map((element) => (
         <ReviewItem key={element.id} review={element}/>
       ))}
     </ul>
