@@ -1,5 +1,7 @@
-import { AuthorizationStatus, SORTING } from './constans';
+import dayjs from 'dayjs';
+import { AuthorizationStatus, randomCity, SORTING } from './constans';
 import { Offer } from './types/offer-type';
+import { Review } from './types/review-type';
 
 export const getOffersByCity = (offers: Offer[], city: string) => offers.filter((offer) => offer.city.name === city);
 
@@ -44,3 +46,9 @@ export const validatePassword = (password: string) => {
 
 export const isAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Auth;
+
+export const sortReviewBydata = (a:Review, b:Review) => dayjs(b.date).diff(dayjs(a.date));
+
+export const getRandomInteger = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+export const getRandomCity = () => randomCity[getRandomInteger(0, randomCity.length - 1)];

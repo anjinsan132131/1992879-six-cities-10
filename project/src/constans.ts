@@ -95,3 +95,7 @@ export enum NameSpace {
   Offers = 'OFFERS',
   User = 'USER',
 }
+
+export const MAX_REVIEW_QUANTITY = 10;
+
+export const randomCity = Object.keys(Cities);
