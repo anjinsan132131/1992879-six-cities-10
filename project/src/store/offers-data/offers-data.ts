@@ -35,9 +35,6 @@ export const offersData = createSlice({
     },
     sortingCityAction: (state) => {
       state.offersByCity = getSortedOffers(getOffersByCity(state.allOffers, state.city), state.sortValue);
-    },
-    clearFavoriteOffers: (state) => {
-      state.favoriteOffers = [];
     }
   },
   extraReducers(builder) {
@@ -66,15 +63,15 @@ export const offersData = createSlice({
       .addCase(addCommentAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
+      .addCase(fetchFavoriteOffersAction.pending, (state) => {
+        state.reloadFavorites = true;
+      })
       .addCase(fetchFavoriteOffersAction.fulfilled, (state, action) => {
         state.favoriteOffers = action.payload;
         state.reloadFavorites = false;
       })
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
         state.reloadFavorites = false;
-      })
-      .addCase(fetchFavoriteOffersAction.pending, (state) => {
-        state.reloadFavorites = true;
       })
       .addCase(changeFavoriteStatusAction.fulfilled, (state, action) => {
         if (action.payload.isFavorite === false) {

@@ -1,6 +1,6 @@
 import { Review } from '../types/review-type';
 
-export const ReviewMock: Review[] = [
+export const reviewMock: Review[] = [
   {
     comment: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     date: 'Sun Jul 17 2022 20:21:19 GMT+0300 (Москва, стандартное время)',

@@ -6,21 +6,11 @@ import LoginPage from '../../pages/login-page/login-page';
 import PageNotFound from '../../pages/page-not-found/page-not-found';
 import RoomPage from '../../pages/room-page/room-page';
 import PrivateRoute from '../../components/private-route/private-route';
-import { Offer } from '../../types/offer-type';
-import { Review } from '../../types/review-type';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { useAppSelector } from '../../hooks';
-import { browserHistory } from '../../browser-history';
-import { HistoryRouter } from '../history-route/history-route';
 import { getIsDataLoadedValue } from '../../store/offers-data/selector';
 
-type AppProps = {
-  offers: Offer[];
-  reviews: Review[];
-  type: string;
-};
-
-function App({offers, reviews, type }: AppProps): JSX.Element {
+function App(): JSX.Element {
   const isDataLoaded = useAppSelector(getIsDataLoadedValue);
 
   if (isDataLoaded) {
@@ -30,31 +20,32 @@ function App({offers, reviews, type }: AppProps): JSX.Element {
   }
 
   return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<MainPage />}
-        />
-        <Route path={AppRoute.Login} element={<LoginPage />} />
-        <Route
-          path={AppRoute.Favorites}
-          element={
-            <PrivateRoute>
-              <FavoritesPage/>
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Room}
-          element={<RoomPage/>}
-        />
-        <Route
-          path="*"
-          element={<PageNotFound />}
-        />
-      </Routes>
-    </HistoryRouter>
+    <Routes>
+      <Route
+        path={AppRoute.Main}
+        element={<MainPage />}
+      />
+      <Route
+        path={AppRoute.Login}
+        element={<LoginPage />}
+      />
+      <Route
+        path={AppRoute.Favorites}
+        element={
+          <PrivateRoute>
+            <FavoritesPage/>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={AppRoute.Room}
+        element={<RoomPage/>}
+      />
+      <Route
+        path="*"
+        element={<PageNotFound />}
+      />
+    </Routes>
   );
 }
 

@@ -138,7 +138,7 @@ function Room({ nearOffers, reviews, offer }: RoomProps): JSX.Element {
           </div>
         </div>
         <section className="property__map map">
-          { nearOffers ? <Map offers={nearOffers} selectedOffer={offer}/> : ''}
+          { nearOffers ? <Map offers={[...nearOffers, offer]} selectedOffer={offer}/> : ''}
         </section>
       </section>
       <div className="container">
