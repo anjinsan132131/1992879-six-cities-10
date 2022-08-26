@@ -3,7 +3,7 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { AuthorizationStatus } from '../../constans';
 import { offersMock } from '../../mocks/offers';
-import { HistoryRouter } from '../history-route/history-route';
+import { HistoryRoute } from '../history-route/history-route';
 import {render, screen} from '@testing-library/react';
 import thunk from 'redux-thunk';
 import { reviewMock } from '../../mocks/review';
@@ -30,9 +30,9 @@ const history = createMemoryHistory();
 
 const fakeApp = (
   <Provider store={store}>
-    <HistoryRouter history={history}>
+    <HistoryRoute history={history}>
       <Room offer={mockOffers[0]} nearOffers={[]} reviews={[]} />
-    </HistoryRouter>
+    </HistoryRoute>
   </Provider>
 );
 

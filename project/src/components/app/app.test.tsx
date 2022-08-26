@@ -3,7 +3,7 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import { AppRoute, AuthorizationStatus } from '../../constans';
 import { offersMock } from '../../mocks/offers';
-import { HistoryRouter } from '../history-route/history-route';
+import { HistoryRoute } from '../history-route/history-route';
 import App from './app';
 import {render, screen} from '@testing-library/react';
 import thunk from 'redux-thunk';
@@ -36,9 +36,9 @@ const history = createMemoryHistory();
 
 const fakeApp = (
   <Provider store={store}>
-    <HistoryRouter history={history}>
+    <HistoryRoute history={history}>
       <App />
-    </HistoryRouter>
+    </HistoryRoute>
   </Provider>
 );
 
@@ -56,9 +56,9 @@ describe('Application Routing', () => {
 
     render(
       <Provider store={storeForLoginPage}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <App />
-        </HistoryRouter>
+        </HistoryRoute>
       </Provider>
     );
 

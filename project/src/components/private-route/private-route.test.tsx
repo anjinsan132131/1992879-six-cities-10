@@ -4,7 +4,7 @@ import { AppRoute, AuthorizationStatus } from '../../constans';
 import { offersMock } from '../../mocks/offers';
 import {render, screen} from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { HistoryRouter } from '../history-route/history-route';
+import { HistoryRoute } from '../history-route/history-route';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from './private-route';
 
@@ -26,7 +26,7 @@ describe('Component: PrivateRouter', () => {
 
     render(
       <Provider store={store}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <Routes>
             <Route
               path={AppRoute.Login}
@@ -41,7 +41,7 @@ describe('Component: PrivateRouter', () => {
               }
             />
           </Routes>
-        </HistoryRouter>
+        </HistoryRoute>
       </Provider>,
     );
 
@@ -59,7 +59,7 @@ describe('Component: PrivateRouter', () => {
 
     render(
       <Provider store={store}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <Routes>
             <Route
               path={AppRoute.Login}
@@ -74,7 +74,7 @@ describe('Component: PrivateRouter', () => {
               }
             />
           </Routes>
-        </HistoryRouter>
+        </HistoryRoute>
       </Provider>,
     );
 

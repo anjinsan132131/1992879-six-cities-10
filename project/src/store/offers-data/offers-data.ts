@@ -80,7 +80,7 @@ export const offersData = createSlice({
           state.favoriteOffers = [...state.favoriteOffers, action.payload];
         }
         state.allOffers = state.allOffers.map((offer) => offer.id === action.payload.id ? { ...offer, isFavorite: action.payload.isFavorite } : offer);
-        state.offersByCity = getOffersByCity(state.allOffers, state.city);
+        state.offersByCity = getSortedOffers(getOffersByCity(state.allOffers, state.city), state.sortValue);
         state.offer = action.payload;
       });
   }

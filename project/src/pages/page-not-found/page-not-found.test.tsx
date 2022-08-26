@@ -2,7 +2,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import {render, screen} from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { HistoryRouter } from '../../components/history-route/history-route';
+import { HistoryRoute } from '../../components/history-route/history-route';
 import { AuthorizationStatus } from '../../constans';
 import { offersMock } from '../../mocks/offers';
 import PageNotFound from './page-not-found';
@@ -21,9 +21,9 @@ describe('Component: PageNotFound', () => {
 
     render(
       <Provider store={store}>
-        <HistoryRouter history={history}>
+        <HistoryRoute history={history}>
           <PageNotFound />
-        </HistoryRouter>
+        </HistoryRoute>
       </Provider>
     );
 
